@@ -74,7 +74,29 @@ exports.jsonSchema = {
 
         },
 
-        // Field Mapping for transactionObject() function
+        // Field Mapping for tontransactionObject() function
+
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "tonTxObject()" },
+                }
+            },
+            then: {
+                properties: {
+                    from: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string" },
+                    gas: { type: "string" },
+                    data: { type: "string" }
+                },
+
+                required: [ "to", "value"]
+            }
+
+        },
+
+        // Field Mapping for txObjSol() function
 
         {
             if: {
@@ -188,6 +210,25 @@ exports.jsonSchema = {
                 required: ["jwt", "data"]
             },
         },
+
+        // Field Mapping for stellarSignTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stellarSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    data: { type: "string" },
+                    rpc: { type: "string" },
+                },
+                required: ["data"]
+            },
+        },
+
         // Field Mapping for userOnboardingDYDX() function
         {
             if: {
@@ -203,6 +244,24 @@ exports.jsonSchema = {
             },
         },
 
+        // Field Mapping for signOrderRFQ() function
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "signOrderRFQ()" },
+                } 
+            },
+            then: {
+                properties: {
+                    dexId: { type: "string", enum: ["1900", "1901"], default: "1900" },
+                    domain: { type: "object" },
+                    types: { type: "object" },
+                    values: { type: "object" }
+                },
+                required: ["domain", "types", "values"] 
+            },
+        },
+        
         // Field Mapping for placeOrderDYDX() function
         {
             if: {
