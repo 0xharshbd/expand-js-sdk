@@ -2,10 +2,6 @@ const Web3 = require('web3');
 const axios = require('axios');
 const SERVER_URL = "https://api.expand.network/";
 
-async function getNonce(account) {
-  return await web3.eth.getTransactionCount(account, 'pending');
-}
-
 module.exports = {
   approveAndSwap: async (options) => {
     const { privateKey, xApiKey, chainId, from, path, gas, amountIn } = options;
@@ -28,8 +24,7 @@ module.exports = {
     }
 
     const web3 = new Web3(rpc);
-
-    let nonce = await getNonce(from);
+    let nonce = await web3.eth.getTransactionCount(account, 'pending');;
 
     try {
       // Step 1: Swap tokens
