@@ -1,6 +1,6 @@
 const Web3 = require('web3');
 const axios = require('axios');
-const SERVER_URL = "http://localhost:3000/";
+const SERVER_URL = "https://api.expand.network/";
 
 module.exports = {
   approveAndSwap: async (options) => {
@@ -64,14 +64,14 @@ module.exports = {
         }, { headers });
 
       }
-
+      
       const batch = new web3.BatchRequest();
 
-      if (approvalResponse) {
+      if (approvalResponse?.data?.status === 200) {
         const approvalData = approvalResponse.data.data;
         const approveTxObject = {
           chainId: approvalData.chainId,
-          from: approvalData.from,
+          from,
           to: approvalData.to,
           value: approvalData.value,
           gas: approvalData.gas,
@@ -91,7 +91,7 @@ module.exports = {
       const swapTxData = swapResponse?.data?.data;
       const swapTxObject = {
         chainId: swapTxData.chainId,
-        from: swapTxData.from,
+        from,
         to: swapTxData.to,
         value: swapTxData.value,
         gas: swapTxData.gas,
