@@ -10,7 +10,7 @@ async function getNonce(account) {
 }
 
 module.exports = {
-  batchRequest: async (transactionObjects, account, privateKey) => {
+  batchRequest: async (transactionObjects, privateKey, account) => {
     if (transactionObjects.length > 0) {
       let count = 0;
       let nonce = await getNonce(account);
@@ -23,7 +23,7 @@ module.exports = {
               console.error('Error executing approve transaction:', err);
               reject(err);
             } else {
-              console.log('Transaction successful:', data);
+              console.log('Transaction Sent:', data);
               resolve(data);
             }
           }));
