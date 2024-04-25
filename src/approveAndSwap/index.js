@@ -2,6 +2,10 @@ const Web3 = require('web3');
 const axios = require('axios');
 const SERVER_URL = "https://api.expand.network/";
 
+async function getNonce(account) {
+  return await web3.eth.getTransactionCount(account, 'pending');
+}
+
 module.exports = {
   approveAndSwap: async (options) => {
     const { privateKey, xApiKey, chainId, from, path, gas, amountIn } = options;
@@ -24,6 +28,8 @@ module.exports = {
     }
 
     const web3 = new Web3(rpc);
+
+    let nonce = await getNonce(from);
 
     try {
       // Step 1: Swap tokens
@@ -64,7 +70,7 @@ module.exports = {
         }, { headers });
 
       }
-      
+
       const batch = new web3.BatchRequest();
 
       if (approvalResponse?.data?.status === 200) {
@@ -77,7 +83,7 @@ module.exports = {
           gas: approvalData.gas,
           data: approvalData.data
         };
-        const approveSignedTX = await web3.eth.accounts.signTransaction(approveTxObject, privateKey);
+        const approveSignedTX = await web3.eth.accounts.signTransaction({ ...approveTxObject, nonce }, privateKey);
 
         await batch.add(web3.eth.sendSignedTransaction(approveSignedTX.rawTransaction, (err, data) => {
           if (err) {
@@ -97,8 +103,8 @@ module.exports = {
         gas: swapTxData.gas,
         data: swapTxData.data
       };
-      const swapSignedTx = await web3.eth.accounts.signTransaction(swapTxObject, privateKey);
-      
+      const swapSignedTx = await web3.eth.accounts.signTransaction({ ...swapTxObject, nonce: nonce + 1 }, privateKey);
+
       await batch.add(web3.eth.sendSignedTransaction(swapSignedTx.rawTransaction, (err, data) => {
         if (err) {
           console.error('Error executing swap transaction:', err);
