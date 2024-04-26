@@ -24,7 +24,7 @@ module.exports = {
     }
 
     const web3 = new Web3(rpc);
-    let nonce = await web3.eth.getTransactionCount(account, 'pending');;
+    let nonce = await web3.eth.getTransactionCount(from, 'pending');;
 
     try {
       // Step 1: Swap tokens
