@@ -2,6 +2,17 @@ const Web3 = require('web3');
 const axios = require('axios');
 const SERVER_URL = "https://api.expand.network/";
 
+// Create an Axios instance with default headers
+async function initializeAxios(xAPIKey){
+  const axiosInstance = axios.create({
+    baseURL: SERVER_URL,
+    headers: {
+      'x-api-key': xAPIKey,
+    },
+  });
+  return axiosInstance
+}
+
 module.exports = {
   approveAndSwap: async (options) => {
     const { privateKey, xApiKey, chainId, from, path, gas, amountIn } = options;
@@ -10,12 +21,13 @@ module.exports = {
     delete swapParams.xApiKey
     delete swapParams.privateKey
     delete swapParams.chainId
-
+    const axiosInstance = await initializeAxios(xApiKey);
+    
     const headers = { 'x-api-key': xApiKey };
     let publicRpcResponse, rpc;
 
     try {
-      publicRpcResponse = await axios.get(SERVER_URL + `chain/getpublicrpc?chainId=${chainId}`, { headers });
+      publicRpcResponse = await axiosInstance.get(`chain/getpublicrpc?chainId=${chainId}`);
       if (publicRpcResponse && publicRpcResponse?.data?.status === 200)
         rpc = publicRpcResponse?.data?.data?.rpc
     } catch (error) {
@@ -28,7 +40,7 @@ module.exports = {
 
     try {
       // Step 1: Swap tokens
-      const swapResponse = await axios.post(SERVER_URL + 'dex/swap', swapParams, { headers });
+      const swapResponse = await axiosInstance.post('dex/swap', swapParams);
 
       // console.log('Swap response:', swapResponse);
 
@@ -38,13 +50,13 @@ module.exports = {
         return
 
       // Step 2: Check allowance
-      const allowanceResponse = await axios.get(SERVER_URL + 'fungibletoken/getuserallowance', {
+      const allowanceResponse = await axiosInstance.get('fungibletoken/getuserallowance', {
         params: {
           owner: from,
           spender,
-          tokenAddress: path[0]
-        }
-      }, { headers });
+          tokenAddress: path[0],
+        },
+      });
 
       const allowance = allowanceResponse?.data?.data?.allowance || "0";
 
@@ -55,14 +67,14 @@ module.exports = {
         const amountToApprove = parseInt(amountIn) - parseInt(allowance);
 
         // Step 3: If allowance is not enough, approve token
-        approvalResponse = await axios.post(SERVER_URL + 'fungibletoken/approve', {
+        approvalResponse = await axiosInstance.post('fungibletoken/approve', {
           from,
           tokenAddress: path[0],
           amount: amountToApprove.toString(),
           to: spender,
           gas,
-          chainId
-        }, { headers });
+          chainId,
+        });
 
       }
 
