@@ -17,7 +17,7 @@ module.exports = {
       let manualTransaction;
       let transactionBuffer;
 
-      if (!(transactionObject.transactionBuffer)) {
+      if (!(transactionObject.data)) {
         transactionObject.value = new BN(transactionObject.value);
         manualTransaction = new solanasdk.Transaction({
           recentBlockhash: recentBlockhash.blockhash,
@@ -34,7 +34,7 @@ module.exports = {
             msg: "signer is not matching with the from address"
           }
         };
-        manualTransaction = solanasdk.Transaction.from(Buffer.from(transactionObject.transactionBuffer, "base64"));
+        manualTransaction = solanasdk.Transaction.from(Buffer.from(transactionObject.data, "base64"));
       }
 
       transactionBuffer = manualTransaction.serializeMessage();

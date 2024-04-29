@@ -111,7 +111,6 @@ exports.jsonSchema = {
                     value: { type: "string" },
                     gas: { type: "string" },
                     data: { type: "string" },
-                    networkId: { type: "string" }
                 },
 
                 required: ["from", "to"]
