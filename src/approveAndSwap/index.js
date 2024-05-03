@@ -1,6 +1,6 @@
 const Web3 = require('web3');
 const axios = require('axios');
-const SERVER_URL = "https://api.expand.network/";
+const SERVER_URL = "http://localhost:3000/";
 const config = require('../../configuration/config.json')
 
 // Create an Axios instance with default headers
@@ -71,7 +71,7 @@ module.exports = {
 
       console.log("Allowance --", allowance)
       let approvalResponse = null;
-
+      let updateAllowance = 0
       if (allowance < amountIn) {
         approvalResponse = await axiosInstance.post('fungibletoken/approve', {
           from,
@@ -81,6 +81,8 @@ module.exports = {
           gas,
           chainId,
         });
+      } else {
+        updateAllowance = parseInt(allowance) - parseInt(amountIn)
       }
 
 
@@ -124,26 +126,65 @@ module.exports = {
         value: swapTxData.value,
         gas: swapTxData.gas,
         data: swapTxData.data,
-        nonce: nonce
+        nonce
       };
 
       console.log("SwapTXobject --", swapTxObject)
       const swapSignedTx = await web3.eth.accounts.signTransaction(swapTxObject, privateKey);
 
-      // setTimeout(async () =>
-      await batch.add(web3.eth.sendSignedTransaction.request(swapSignedTx.rawTransaction, (err, data) => {
-        if (err) {
-          console.error('Error executing swap transaction:', err);
-        } else {
-          console.log('Swap transaction successful:', data);
-        }
-      }))
-      // , 10000
-      // )
+      setTimeout(async () =>
+        await batch.add(web3.eth.sendSignedTransaction.request(swapSignedTx.rawTransaction, (err, data) => {
+          if (err) {
+            console.error('Error executing swap transaction:', err);
+          } else {
+            console.log('Swap transaction successful:', data);
+          }
+        }))
+        , 20000
+      )
 
-      // setTimeout(async () => 
-      await batch.execute()
-      // , 10000)
+      setTimeout(() => console.log("Waiting..."), 20000);
+
+      //code for change allowance after approve and swap
+      
+      // approvalResponse = await axiosInstance.post('fungibletoken/approve', {
+      //   from,
+      //   tokenAddress: path[0],
+      //   amount: updateAllowance.toString(),
+      //   to: spender,
+      //   gas,
+      //   chainId,
+      // });
+
+      // if (approvalResponse?.data?.status === 200) {
+      //   const approvalData = approvalResponse?.data?.data;
+      //   const approveTxObject = {
+      //     chainId: approvalData.chainId,
+      //     from,
+      //     to: approvalData.to,
+      //     value: approvalData.value,
+      //     gas: approvalData.gas,
+      //     data: approvalData.data,
+      //     nonce
+      //   };
+
+      //   console.log("Approval object --", approveTxObject)
+
+      //   const approveSignedTX = await web3.eth.accounts.signTransaction(approveTxObject, privateKey);
+      //   console.log("Approve signed tx --", approveSignedTX);
+
+      //   await batch.add(web3.eth.sendSignedTransaction.request(approveSignedTX.rawTransaction, (err, data) => {
+      //     if (err) {
+      //       console.error('Error executing approve transaction:', err);
+      //     } else {
+      //       console.log('Approval transaction successful:', data);
+      //     }
+      //   }));
+      // }
+
+      setTimeout(async () =>
+        await batch.execute()
+        , 20000)
 
       // batchRequest([approveTxObject, swapTxObject], privateKey, from);
     } catch (error) {
