@@ -25,6 +25,11 @@
             "chainName": "Evm",
             "chainSymbol": "TETHKVN"
         },
+        "17000": {
+            "localName": "EthereumTestnetHolesky",
+            "chainName": "Evm",
+            "chainSymbol": "TETHHSKY"
+        },
         "56": {
             "localName": "BinanceSmartChain",
             "chainName": "Evm",
