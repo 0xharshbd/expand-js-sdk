@@ -1,6 +1,6 @@
 const Web3 = require('web3');
 const axios = require('axios');
-const SERVER_URL = "http://localhost:3000/";
+const SERVER_URL = "https://api.expand.network/";
 const config = require('../../configuration/config.json')
 
 // Create an Axios instance with default headers
@@ -51,7 +51,7 @@ module.exports = {
 
     console.log("Rpc --", rpc)
     const web3 = new Web3(rpc);
-    console.log("Web3 connection", web3);
+    // console.log("Web3 connection", web3);
 
     let nonce = await web3.eth.getTransactionCount(from, 'pending');
     console.log("Nonce --", nonce);
@@ -112,7 +112,7 @@ module.exports = {
         }));
       }
 
-      setTimeout(() => console.log("Waiting..."), 20000);
+      setTimeout(() => console.log("Waiting..."), 60000);
 
       nonce = await web3.eth.getTransactionCount(from, 'pending');
 
@@ -126,13 +126,13 @@ module.exports = {
         value: swapTxData.value,
         gas: swapTxData.gas,
         data: swapTxData.data,
-        nonce
+        nonce: nonce + 1
       };
 
       console.log("SwapTXobject --", swapTxObject)
       const swapSignedTx = await web3.eth.accounts.signTransaction(swapTxObject, privateKey);
 
-      setTimeout(async () =>
+      // setTimeout(async () =>
         await batch.add(web3.eth.sendSignedTransaction.request(swapSignedTx.rawTransaction, (err, data) => {
           if (err) {
             console.error('Error executing swap transaction:', err);
@@ -140,13 +140,13 @@ module.exports = {
             console.log('Swap transaction successful:', data);
           }
         }))
-        , 20000
-      )
+      //   , 60000
+      // )
 
-      setTimeout(() => console.log("Waiting..."), 20000);
+      // setTimeout(() => console.log("Waiting..."), 20000);
 
       //code for change allowance after approve and swap
-      
+
       // approvalResponse = await axiosInstance.post('fungibletoken/approve', {
       //   from,
       //   tokenAddress: path[0],
@@ -182,9 +182,9 @@ module.exports = {
       //   }));
       // }
 
-      setTimeout(async () =>
+      // setTimeout(async () =>
         await batch.execute()
-        , 20000)
+        // , 20000)
 
       // batchRequest([approveTxObject, swapTxObject], privateKey, from);
     } catch (error) {
