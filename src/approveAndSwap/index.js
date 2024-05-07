@@ -14,14 +14,14 @@ async function initializeAxios(xAPIKey) {
   return axiosInstance
 }
 
-async function getNonce(account, web3) {
-  const pendingNonce = await web3.eth.getTransactionCount(account, 'pending');
-  const latestNonce = await web3.eth.getTransactionCount(account);
-  console.log("pendingNonce --", pendingNonce);
-  console.log("latestNonce --", latestNonce);
+// async function getNonce(account, web3) {
+//   const pendingNonce = await web3.eth.getTransactionCount(account, 'pending');
+//   const latestNonce = await web3.eth.getTransactionCount(account);
+//   console.log("pendingNonce --", pendingNonce);
+//   console.log("latestNonce --", latestNonce);
 
-  return Math.max(pendingNonce, latestNonce);
-}
+//   return Math.max(pendingNonce, latestNonce);
+// }
 
 module.exports = {
   approveAndSwap: async (options) => {
@@ -53,12 +53,13 @@ module.exports = {
     const web3 = new Web3(rpc);
     // console.log("Web3 connection", web3);
 
-    let nonce = await web3.eth.getTransactionCount(from, 'pending');
-    console.log("Nonce --", nonce);
+    // let nonce = await web3.eth.getTransactionCount(from, 'pending');
+    // console.log("Nonce --", nonce);
     const batch = new web3.BatchRequest();
 
     try {
-
+      let nonce = await web3.eth.getTransactionCount(from, 'pending');
+      console.log("Nonce before approval --", nonce);
       const allowanceResponse = await axiosInstance.get('fungibletoken/getuserallowance', {
         params: {
           owner: from,
@@ -103,6 +104,8 @@ module.exports = {
         const approveSignedTX = await web3.eth.accounts.signTransaction(approveTxObject, privateKey);
         console.log("Approve signed tx --", approveSignedTX);
 
+        nonce = await web3.eth.getTransactionCount(from, "pending");
+
         await batch.add(web3.eth.sendSignedTransaction.request(approveSignedTX.rawTransaction, (err, data) => {
           if (err) {
             console.error('Error executing approve transaction:', err);
@@ -112,10 +115,17 @@ module.exports = {
         }));
       }
 
-      setTimeout(() => console.log("Waiting..."), 60000);
+     // nonce++;
 
       nonce = await web3.eth.getTransactionCount(from, 'pending');
 
+      console.log("Nonce after approval but before swap  -----> ", nonce);
+
+      // setTimeout(() => console.log("Waiting..."), 60000);
+
+      // nonce = await web3.eth.getTransactionCount(from, 'pending');
+
+      
       const swapResponse = await axiosInstance.post('dex/swap', swapParams);
 
       const swapTxData = swapResponse?.data?.data;
@@ -126,11 +136,12 @@ module.exports = {
         value: swapTxData.value,
         gas: swapTxData.gas,
         data: swapTxData.data,
-        nonce: nonce + 1
+        nonce
       };
 
       console.log("SwapTXobject --", swapTxObject)
       const swapSignedTx = await web3.eth.accounts.signTransaction(swapTxObject, privateKey);
+      nonce = await web3.eth.getTransactionCount(from, 'pending');
 
       // setTimeout(async () =>
         await batch.add(web3.eth.sendSignedTransaction.request(swapSignedTx.rawTransaction, (err, data) => {
