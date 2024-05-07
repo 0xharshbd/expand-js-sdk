@@ -42,11 +42,11 @@ We currently support the following blockchains:
   <tbody>
     <tr>
       <td>EVM compatible</td>
-      <td>Ethereum, Binance Smart Chain, Avalanche, Polygon, Cronos, Arbitrum, Fantom, Optimism, Starknet, Base</td>
+      <td>Arbitrum, Avalanche, Base, Binance Smart Chain, Cronos, Ethereum, Fantom, Optimism, Polygon, zkSync</td>
     </tr>
     <tr>
       <td>Non-EVM</td>
-      <td>Solana, Tron, NEAR, Algorand, Sui, Aptos</td>
+      <td>Algorand, Aptos, NEAR, Solana, Starknet, Stellar, Sui, TON, Tron</td>
       </tr>
   </tbody>
 </table>
@@ -64,27 +64,31 @@ In addition, we currently support the following DeFi protocols:
   <tbody>
     <tr>
       <td>DEX & Aggregators </td>
-      <td>Uniswap v2, v3, Uniswap X, Sushiswap, Pancakeswap, Curve, Balancer, 0x, 1inch </td>
+      <td>0x, 1inch, Balancer, Curve, Kyberswap, Pancakeswap, Sushiswap, Trader Joe, Uniswap (V2, V3, X)</td>
     </tr>
     <tr>
         <td>Bridge </td>
         <td>Stargate, Squid Router</td>
     </tr>
-    <tr>
+     <tr>
       <td>Lend and Borrow</td>
-      <td>Aave v2, v3, Compound</td>
+      <td>Aave V2, Aave V3, Compound V2, Compound V3</td>
     </tr>
     <tr>
-        <td>Synthetic </td>
+        <td>Synthetic</td>
         <td>Synthetix</td>
     </tr>
     <tr>
-        <td>Yield aggregators </td>
+        <td>Yield aggregator</td>
         <td>Yearn Finance, Harvest Finance</td>
     </tr>
     <tr>
-        <td>Oracles </td>
-        <td>Chainlink, Winklink</td>
+        <td>Oracle</td>
+        <td>Chainlink, Pyth Network, Winklink</td>
+    </tr>
+    <tr>
+      <td>Derivative</td>
+      <td>dYdX v4</td>
     </tr>
   </tbody>
 </table>
@@ -100,10 +104,6 @@ Coming soon:
   </thead>
   <tbody>
     <tr>
-      <td>Derivatives</td>
-      <td>dYdX v4</td>
-    </tr>
-    <tr>
       <td>Liquid Staking</td>
       <td>Lido</td>
     </tr>
@@ -112,7 +112,7 @@ Coming soon:
 
 <br> 
 
->All transactions are securely signed on your end, so your private key remains with you and never comes to us over API. We do not hold your crypto:closed_lock_with_key: at any point: **Your keys, Your crypto**. Our APIs are a one-stop-shop for you to make the enquiries and conduct the transactions as you want.
+>All transactions are securely signed on your end, so your private key remains with you and never comes to us over API. We do not hold your crypto at any point: :closed_lock_with_key: **Your keys, Your crypto**. Our APIs are a one-stop-shop for you to make the enquiries and conduct the transactions as you want.
 
 ## Client-Side Security Essentials
 
