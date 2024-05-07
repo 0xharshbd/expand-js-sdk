@@ -100,28 +100,39 @@ Coming soon:
   </tbody>
 </table>
 <br> 
+
 >All transactions are securely signed on your end, so your private key remains with you and never comes to us over API. We do not hold your crypto at any point: :closed_lock_with_key: **Your keys, Your crypto**. Our APIs are a one-stop-shop for you to make the enquiries and conduct the transactions as you want.
+
 ## Client-Side Security Essentials
+
 ### Certificate transparency
 CT makes it easier to detect and prevent digital certificate fraud, thereby improving the security of internet connections.
 >**In addition to implementing certificate transparency measures on our end, we _highly recommend_ users to also consider implementing these measures for added security benefits.**
+
 ### Private Key
 A user's private key is stored securely in a digital wallet, and should never be shared with anyone as it provides full access and control over their digital assets.
 >**It is _highly recommended_ that users take necessary precautions to ensure the safety and confidentiality of their private keys, as we do not possess any access or control over them.**
+
 ### Additional Security Precautions
 * It is important for the user to safeguard both their data and workstation from potential risks such as spoofing, tampering, and other related threats.
 * It is important for the end user to connect to a secure network and ensure that they use only TLS 1.2 or a newer version for enhanced security to safeguard them from any kind of threats and attacks.
+
 ## Installation
 To install, clone the repository from git directly.
+
 ```
 git clone https://github.com/expand-network/sdk-nodejs.git
 ```
+
 Or, use the following npm package.
+
 ```
 npm i expand-network
 ```
+
 ## Usage
 >You can get your API key by visiting our [website](https://expand.network/) or by clicking [here](https://auth.expand.network/)
+
 ### Chain functions
 Sample code: Send one Wei from one public address to another public address. You need to use your private key to sign the transaction. The return value is the transaction hash (`res`).
 
