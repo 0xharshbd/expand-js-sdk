@@ -167,8 +167,8 @@ async function approve() {
     
     // Preparing transaction
     const preparedTx = await prepareTransaction('https://api.expand.network/fungibletoken/approve', {
-      from: '0x63056E00436Da25BcF48A40dfBbDcc7089351006',
-      to: '0x828b154032950c8ff7cf8085d841723db2696056',
+      from: 'PUBLIC_ADDRESS',
+      to: 'PUBLIC_ADDRESS', // The spender's or contract's or router's address that needs to be approved
       tokenAddress:"0x6B175474E89094C44Da98b954EedeAC495271d0F", 
       amount: "5000000000000000000",
       gas: '100000',
@@ -198,10 +198,10 @@ async function swap() {
   const preparedTx = await prepareTransaction('https://api.expand.network/dex/swap', {
     amountIn: '5000000000000000000',
     amountOutMin: '0',
-    path: ['0x6B175474E89094C44Da98b954EedeAC495271d0F','0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'],
-    to: '0x63056E00436Da25BcF48A40dfBbDcc7089351006',
-    deadline: '1693143453',
-    from: '0x63056E00436Da25BcF48A40dfBbDcc7089351006',
+    path: ['0x6B175474E89094C44Da98b954EedeAC495271d0F','0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'], // DAI and WETH contract addresses
+    to: 'PUBLIC_ADDRESS',
+    deadline: '1693143453', // Epoch Unix timestamp
+    from: 'PUBLIC_ADDRESS',
     gas: '229880',
     xApiKey : 'YOUR_API_KEY',
     chainId:"1"
