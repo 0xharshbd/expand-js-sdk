@@ -35,6 +35,7 @@ module.exports = {
           }
         };
         manualTransaction = solanasdk.Transaction.from(Buffer.from(transactionObject.data, "base64"));
+        manualTransaction.recentBlockhash = recentBlockhash.blockhash;
       }
 
       transactionBuffer = manualTransaction.serializeMessage();
