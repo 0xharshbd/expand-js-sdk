@@ -16,8 +16,8 @@ class WalletPhantom {
     signTransaction = async (transactionObject) => {
 
         const configuration = { "params": {} };
-        const transactionOptions = transactionObject;
-        transactionOptions.function = "transactionObject()";
+        // const transactionOptions = transactionObject;
+        transactionObject.function = "txObjectSol()";
         const validObject = await schemaValidator.validateInput(transactionObject);
 
         if (!validObject.valid) {
@@ -41,8 +41,6 @@ class WalletPhantom {
         let rpc = await axios.get(apiURL, configuration);
         rpc = rpc.data.data.rpc;
         const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
-        transactionOptions.value = new BN(transactionOptions.value);
-
 
         const options = {};
         options.privateKey = this.privateKey;
