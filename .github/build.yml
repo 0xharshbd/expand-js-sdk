@@ -1,9 +1,9 @@
 name: Sonarqube Scan
 
 on:
-  pull_request:
-    branches: 
-      - develop
+  push:
+    branches:
+      - sonarqube-sdk-nodejs
 
 jobs:
   build:
