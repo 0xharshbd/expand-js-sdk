@@ -64,7 +64,6 @@ exports.decodeTransaction = async (options) => {
         return response.data;
 
     } catch (error) {
-        console.log("error");
         return error;
     }
 
