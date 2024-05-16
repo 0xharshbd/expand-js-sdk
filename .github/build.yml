@@ -3,7 +3,9 @@ name: Sonarqube Scan
 on:
   push:
     branches:
-      - sonarqube-sdk-nodejs
+      - develop
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
