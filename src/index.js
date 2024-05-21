@@ -14,6 +14,7 @@ exports.prepareTransaction = async (apiURL, options) => {
         return (validJson);
     }
 
+    const { chainId, xApiKey } = filterOptions;
     try {
 
         const paramConfig = {
@@ -21,13 +22,13 @@ exports.prepareTransaction = async (apiURL, options) => {
             url: apiURL,
             data: filterOptions,
             headers: {
-                "x-api-key": filterOptions.xApiKey
+                "x-api-key": xApiKey
             }
 
         };
 
         const response = await axios(paramConfig).then(result => result.data);
-        response.data.chainId = filterOptions.chainId;
+        if (chainId) response.data.chainId = chainId;
         return response.data;
 
     }
