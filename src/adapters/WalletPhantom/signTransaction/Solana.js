@@ -16,7 +16,8 @@ module.exports = {
       let recentBlockhash = await web3.getRecentBlockhash();
       let manualTransaction;
       let transactionBuffer;
-      if (!(transactionObject.transactionBuffer)) {
+
+      if (!(transactionObject.data)) {
         transactionObject.value = new BN(transactionObject.value);
         manualTransaction = new solanasdk.Transaction({
           recentBlockhash: recentBlockhash.blockhash,
@@ -33,13 +34,18 @@ module.exports = {
             msg: "signer is not matching with the from address"
           }
         };
-        manualTransaction = solanasdk.Transaction.from(Buffer.from(transactionObject.transactionBuffer, "base64"));
+        manualTransaction = solanasdk.Transaction.from(Buffer.from(transactionObject.data, "base64"));
+        manualTransaction.recentBlockhash = recentBlockhash.blockhash;
       }
-      // const toKey = solanasdk.Keypair.generate(transactionObject.to);
 
       transactionBuffer = manualTransaction.serializeMessage();
       const signature = nacl.sign.detached(transactionBuffer, from.secretKey);
       manualTransaction.addSignature(from.publicKey, signature);
+      if (transactionObject.additionalSigners) {
+        const additionalKey = solanasdk.Keypair.fromSecretKey(bs58.decode(transactionObject.additionalSigners));
+        const signature = nacl.sign.detached(transactionBuffer, additionalKey.secretKey);
+        manualTransaction.addSignature(additionalKey.publicKey, signature);
+      }
       const serializedTx = manualTransaction.serialize();
       const rawTransaction = Buffer.from(serializedTx).toString("base64");
       return { "rawTransaction": rawTransaction };
@@ -47,7 +53,5 @@ module.exports = {
     catch (error) {
       return error;
     }
-
   }
-
 };
