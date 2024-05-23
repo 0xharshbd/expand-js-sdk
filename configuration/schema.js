@@ -96,6 +96,28 @@ exports.jsonSchema = {
 
         },
 
+        // Field Mapping for txObjSol() function
+
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "txObjSol()" },
+                }
+            },
+            then: {
+                properties: {
+                    from: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string" },
+                    gas: { type: "string" },
+                    data: { type: "string" },
+                },
+
+                required: ["from", "to"]
+            }
+
+        },
+
         // Field Mapping for sendTransaction() function
         {
             if: {
