@@ -2,30 +2,28 @@ const { WalletXRPL, prepareTransaction } = require('../src/index');
 const dotenv = require('dotenv');
 
 const main = async () => {
-  // configure the env
   dotenv.config();
 
-  const wallet1 = "rHj2VSZ6hVcg4gNXQ1sUDV8svgyZU3m2j";
-  const wallet2 = "rw1QiNoXk3rv7MU3eXxbu41kovA9eP27R1";
-  const wallet1Secret = "dynamic remember coffee churn rigid estate rubber breeze favorite slam essence mouse";
-  const wallet2Secret = "battle fragile short disease close inspire north exclude decide spice original idle";
+  const wallet1 = "<user address>";
+  const wallet2 = "<user address>"; 
 
   // Initialise the wallet client
-  const wallet = new WalletXRPL({ xApiKey: "Mqjy4Wf5mZ7NlixNDAqaE2CxjNqEgdD34pueYJvc", privateKey: "sEd725KzSzAvipRjpKwxXmjBebX3Rhy" });
+  const wallet = new WalletXRPL({ xApiKey: process.env.xApiKey, privateKey: process.env.xrplSecretKey });
 
   // Prepare the transaction from expand api
-  const preparedTx = await prepareTransaction('http://localhost:3000/rwa/transfer', {
+  const preparedTx = await prepareTransaction('http://localhost:3000/rwa/freeze', {
     "chainId": "1601",
-    "from": "rUHB1EFDRWHonEfGU7hFuYKyBGuEgsFu7x",
-    "amount": "18000000",
-    "to": wallet1,
-    "xApiKey": "Mqjy4Wf5mZ7NlixNDAqaE2CxjNqEgdD34pueYJvc"
+    "user": wallet1,
+    "amount": "<amount>",
+    "assetCode": "<assetCode>",
+    "issuer": wallet2,
+    "xApiKey": process.env.xApiKey
   });
 
-  console.log(preparedTx);
+  console.log(preparedTx?.response?.data);
+
   // Securely sign the transaction on user's end
   const signedTx = await wallet.signTransaction(preparedTx);
-  console.log(signedTx)
   const tx = await wallet.sendTransaction(signedTx);
 
   console.log("Tx: ", tx);

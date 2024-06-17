@@ -1,8 +1,11 @@
 const { Wallet, prepareTransaction } = require("../src");
+const dotenv = require('dotenv');
 
 async function swap() {
-  const xApiKey = "tK503cR23o8YTvXhNoDNo7kQf5sQdbXP8qbqkBeQ"
-  const privateKey = "c03e8ee249d32de6a5e15cf526f05c89d574c275890be6ddbc61128facde79da"
+  dotenv.config();
+
+  const xApiKey = process.env.xApiKey
+  const privateKey = process.env.privateKey
 
   const wallet = new Wallet({ privateKey, xApiKey });
   
@@ -15,21 +18,21 @@ async function swap() {
     ],
     "amountIn": "50000000000000000000", // 50 Matic
     "amountOutMin": "730655",
-    "to": "0x7fbc79aa073349bc6bb69c080437d78815e75804",
+    "to": "<user address>",
     "gas": "80000",
-    "from": "0x7fbc79aa073349bc6bb69c080437d78815e75804",
+    "from": "<user address>",
     "deadline": "1716461989",
     "slippage": "1",
     xApiKey
 });
 
   console.log(preparedTx);
-  // Signing transaction
   
+  // Signing transaction
   const signedTx = await wallet.signTransaction(preparedTx); 
 
   // //Sending transaction
-  // const tx = await wallet.sendTransaction(signedTx);
-  // console.log("Transaction Pending....", tx.data);
+  const tx = await wallet.sendTransaction(signedTx);
+  console.log("Transaction Pending....", tx.data);
 }
 swap();
