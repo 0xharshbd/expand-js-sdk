@@ -260,6 +260,24 @@ exports.jsonSchema = {
                 required: ["domain", "types", "values"] 
             },
         },
+
+        // Field Mapping for signLimitOrder() function
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "signLimitOrder()" },
+                } 
+            },
+            then: {
+                properties: {
+                    dexId: { type: "string", enum: ["2200", "2201", "2202", "2203", "2204", "2205", "2206", "2207", "2208"], default: "2200" },
+                    domain: { type: "object" },
+                    types: { type: "object" },
+                    message: { type: "object" }
+                },
+                required: ["domain", "types", "message"] 
+            },
+        },
         
         // Field Mapping for placeOrderDYDX() function
         {
