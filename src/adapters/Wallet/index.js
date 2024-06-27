@@ -144,7 +144,7 @@ class Wallet {
             { Order: types.Order },
             message
         );
-        return { signature };
+        return { signature, salt: message.salt };
     };
 
     signCancelLimitOrder = async (options) => {
