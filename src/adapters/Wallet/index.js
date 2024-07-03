@@ -55,7 +55,7 @@ class Wallet {
     signVersionedTransaction = async (transactionObject) => {
 
         const configuration = { "params": {} };
-        transactionObject.function = "txObjectSol()";
+        transactionObject.function = "txObjSol()";
         const validObject = await schemaValidator.validateInput(transactionObject);
 
         if (!validObject.valid) {

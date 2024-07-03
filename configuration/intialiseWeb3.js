@@ -10,6 +10,8 @@ const {
 } = require("@mysten/sui.js");
 const aptos = require('aptos');
 const { TonClient, WalletContractV4, internal } = require("@ton/ton");
+const { StargateClient } = require("@cosmjs/stargate");
+
 const common = require('./common');
 const config = require('./config.json');
 const errorMessage = require('./errorMessage.json');
@@ -97,8 +99,9 @@ exports.initialiseWeb3 = async (data) => {
         });
     } else if (chainName === 'Stellar') {
         web3 = new Horizon.Server(rpc);
+    } else if (chainName === "Cosmos") {
+        web3 = await StargateClient.connect(rpc);
     }
-
 
     return (web3);
 

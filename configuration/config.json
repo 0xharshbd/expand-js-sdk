@@ -261,6 +261,22 @@
             "chainSymbol": "TXLM",
             "networkPassphrase": "Test SDF Network ; September 2015",
             "rpc": "https://horizon-testnet.stellar.org"
+        },
+        "cosmoshub-4": {
+            "localName": "cosmoshub_mainnet",
+            "chainName": "Cosmos",
+            "chainSymbol": "cosmos",
+            "rpc": "https://cosmos-rpc.publicnode.com:443",
+            "publicRpc": "https://cosmos-rpc.publicnode.com:443",
+            "gasPrice": "3000"
+        },
+        "theta-testnet-001": {
+            "localName": "cosmoshub_testnet",
+            "chainName": "Cosmos",
+            "chainSymbol": "cosmos",
+            "rpc": "https://rpc.sentry-01.theta-testnet.polypore.xyz",
+            "publicRpc": "https://rpc.sentry-01.theta-testnet.polypore.xyz",
+            "gasPrice": "3000"
         }
     },
     "fireblocks": {
