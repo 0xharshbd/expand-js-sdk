@@ -35,15 +35,16 @@ const signCreateLimitOrder = async () => {
 
   const res = await axios.request(config);
   const { domain, types, message } = res.data.data.unsignedCreateOrder;
-
-  const sig = await wallet.signCreateLimitOrder({ domain, types, message });
+  
+  const orderType = "create";
+  const sig = await wallet.signLimitOrder({ domain, types, message, orderType });
   console.log(sig);
 }
 
 const signCancelLimitOrder = async () => {
   const apiConfig = JSON.stringify({
     "dexId": "2200",
-    "orderId": "83937",
+    "orderId": "<orderId>",
     "from": "0xB409cB0b5DB9f148d0bc491E140D9E0FDd789C11"
 });
 
@@ -61,8 +62,8 @@ const signCancelLimitOrder = async () => {
 
   const res = await axios.request(config);
   const { domain, types, message } = res.data.data.unsignedCancelOrder;
-
-  const sig = await wallet.signCancelLimitOrder({ domain, types, message });
+  const orderType = "cancel";
+  const sig = await wallet.signLimitOrder({ domain, types, message, orderType });
   console.log(sig);
 }
 
