@@ -273,7 +273,8 @@ exports.jsonSchema = {
                     dexId: { type: "string", enum: ["2200", "2201", "2202", "2203", "2204", "2205", "2206", "2207", "2208"], default: "2200" },
                     domain: { type: "object" },
                     types: { type: "object" },
-                    message: { type: "object" }
+                    message: { type: "object" },
+                    orderType: { type: "string", enum: ["create", "cancel"], default: "create"},
                 },
                 required: ["domain", "types", "message"] 
             },
