@@ -30,7 +30,7 @@ class WalletXRPL {
       }
     };
 
-    const account = xrpl.Wallet.fromSeed(this.privateKey);
+    const account = xrpl.Wallet.fromMnemonic(this.privateKey);
 
     const decodedData = JSON.parse(atob(data));
     console.log(decodedData);
