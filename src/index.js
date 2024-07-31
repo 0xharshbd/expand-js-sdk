@@ -1,7 +1,9 @@
 const axios = require('axios').default;
 const config = require('../configuration/config.json');
 const schemaValidator = require('../configuration/schemaValidator');
-const { Wallet, WalletFordefi, WalletDFNS, WalletTON, WalletFireblocks, WalletPhantom, WalletCoinbase, WalletCircle, WalletStellar, WalletXRPL } = require('./interfaces/index');
+const { Wallet, WalletFordefi, WalletDFNS, WalletTON, 
+        WalletFireblocks, WalletPhantom, WalletCoinbase, 
+        WalletCircle, WalletCosmos, WalletStellar, WalletXRPL } = require('./interfaces/index');
 
 exports.prepareTransaction = async (apiURL, options) => {
 
@@ -87,6 +89,9 @@ exports.WalletCircle = WalletCircle;
 exports.WalletStellar = WalletStellar;
 
 exports.WalletXRPL = WalletXRPL;
+
+exports.WalletCosmos = WalletCosmos;
+
 
 
 

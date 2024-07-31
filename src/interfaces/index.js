@@ -6,6 +6,7 @@ const { WalletCoinbase } = require('../adapters/WalletCoinbase');
 const { WalletTON } = require('../adapters/WalletTON');
 const { WalletFireblocks } = require('../adapters/WalletFireblocks');
 const { WalletCircle } = require('../adapters/WalletCircle');
+const { WalletCosmos } = require("../adapters/WalletCosmos");
 const { WalletStellar } = require('../adapters/WalletStellar');
 const { WalletXRPL } = require('../adapters/WalletXRPL');
 
@@ -19,5 +20,6 @@ module.exports = {
     WalletFireblocks,
     WalletCircle,
     WalletStellar,
-    WalletXRPL
+    WalletXRPL,
+    WalletCosmos
 };
