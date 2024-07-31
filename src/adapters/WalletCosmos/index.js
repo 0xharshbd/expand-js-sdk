@@ -1,5 +1,5 @@
-const { DirectSecp256k1HdWallet } = require("@cosmjs/proto-signing")
-const { SigningStargateClient } = require("@cosmjs/stargate")
+const { DirectSecp256k1HdWallet } = require("@cosmjs/proto-signing");
+const { SigningStargateClient } = require("@cosmjs/stargate");
 const { TxRaw } = require("cosmjs-types/cosmos/tx/v1beta1/tx");
 const axios = require('axios').default;
 const schemaValidator = require('../../../configuration/schemaValidator');

@@ -216,6 +216,19 @@ async function swap() {
 }
 swap();
 ```
+## Expand now supports Versioned transactions on Solana
+### Versioned transaction
+Versioned Transactions are the new transaction format that allows for additional functionality in the Solana runtime, including Address Lookup Tables.
+
+The Solana runtime supports two transaction versions:
+
+* **legacy** - older transaction format with no additional benefit
+* **0** - added support for Address Lookup Tables
+
+*(0 is known as versioned transaction)
+
+Now using expand users can leverage Versioned Transactions to pack richer instruction sets into a single transaction and use lookup tables.
+
 ## Examples
 ### Get balance 
 Sample code: get balances from different chains: Ethereum, BSC and Solana.

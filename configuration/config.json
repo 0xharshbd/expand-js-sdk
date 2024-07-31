@@ -287,6 +287,18 @@
             "rpc": "https://rpc.sentry-01.theta-testnet.polypore.xyz",
             "publicRpc": "https://rpc.sentry-01.theta-testnet.polypore.xyz",
             "gasPrice": "3000"
+        },
+        "1600": {
+            "localName": "XRPLedger",
+            "chainName": "XRPL",
+            "chainSymbol": "XRPL",
+            "network": "mainnet"
+        },
+        "1601": {
+            "localName": "XRPLedgerTestnet",
+            "chainName": "XRPL",
+            "chainSymbol": "TXRPL",
+            "network": "testnet"
         }
     },
     "fireblocks": {
