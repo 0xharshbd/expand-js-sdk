@@ -271,6 +271,18 @@
             "chainSymbol": "TXLM",
             "networkPassphrase": "Test SDF Network ; September 2015",
             "rpc": "https://horizon-testnet.stellar.org"
+        },
+        "1600": {
+            "localName": "XRPLedger",
+            "chainName": "XRPL",
+            "chainSymbol": "XRPL",
+            "network": "mainnet"
+        },
+        "1601": {
+            "localName": "XRPLedgerTestnet",
+            "chainName": "XRPL",
+            "chainSymbol": "TXRPL",
+            "network": "testnet"
         }
     },
     "fireblocks": {
