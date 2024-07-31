@@ -11,7 +11,7 @@ const main = async () => {
   const wallet = new WalletXRPL({ xApiKey: process.env.xApiKey, privateKey: process.env.xrplSecretKey });
 
   // Prepare the transaction from expand api
-  const preparedTx = await prepareTransaction('http://localhost:3000/rwa/freeze', {
+  const preparedTx = await prepareTransaction('https://api.expand.network/rwa/freeze', {
     "chainId": "1601",
     "user": wallet1,
     "amount": "<amount>",
