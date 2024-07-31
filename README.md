@@ -222,8 +222,8 @@ Versioned Transactions are the new transaction format that allows for additional
 
 The Solana runtime supports two transaction versions:
 
-legacy - older transaction format with no additional benefit
-0 - added support for Address Lookup Tables
+  **legacy** - older transaction format with no additional benefit
+  **0** - added support for Address Lookup Tables
 
 *(0 is known as versioned transaction)
 
