@@ -151,6 +151,42 @@ class Wallet {
         return { signature };
     };
 
+    signLimitOrder = async (options) => {
+        const filterOptions = options;
+        filterOptions.function = "signLimitOrder()";
+        const validJson = await schemaValidator.validateInput(options);
+        if (!validJson.valid) {
+            return (validJson);
+        }
+
+        const { dexId, orderType, domain, types, message } = options;
+        const { chainId } = config.dexes[dexId]
+
+        let apiConfig = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `${config.url.apiurl}/chain/getpublicrpc?chainId=${chainId}`,
+            headers: {
+                'x-api-key': this.xApiKey
+            }
+        };
+
+        let rpc = await axios.request(apiConfig);
+        rpc = rpc.data.data.rpc;
+
+        const provider = new ethers.providers.JsonRpcProvider(rpc);
+        const signer = new ethers.Wallet(this.privateKey, provider);
+        const signature = orderType === "create" ? await signer._signTypedData(
+            domain,
+            { Order: types.Order },
+            message
+        ) : await signer._signTypedData(
+            domain,
+            { CancelOrder: types.CancelOrder },
+            message
+        );
+        return { signature, ...(orderType === "create" && {salt: message.salt}) };
+    };
 }
 
 module.exports = { Wallet };

@@ -325,6 +325,60 @@
             "dexName": "UniswapX",
             "chainName": "Ethereum",
             "chainId": "5"
+        },
+        "2200": {
+            "dexName": "Kyberswap",
+            "localDexName": "Kyberswap",
+            "chainName": "Ethereum",
+            "chainId": "1"
+        },
+        "2201": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapBsc",
+            "chainName": "Ethereum",
+            "chainId": "56"
+        },
+        "2202": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapPolygon",
+            "chainName": "Ethereum",
+            "chainId": "137"
+        },
+        "2203": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapArbitrum",
+            "chainName": "Ethereum",
+            "chainId": "42161"
+        },
+        "2204": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapAvalanche",
+            "chainName": "Ethereum",
+            "chainId": "43114"
+        },
+        "2205": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapOptimism",
+            "chainName": "Ethereum",
+            "chainId": "10"
+        },
+        "2206": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapBase",
+            "chainName": "Ethereum",
+            "chainId": "8453"
+        },
+        "2207": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapFantom",
+            "chainName": "Ethereum",
+            "chainId": "250"
+        },
+        "2208": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapCronos",
+            "chainName": "Ethereum",
+            "chainId": "25"
         }
     },
     
