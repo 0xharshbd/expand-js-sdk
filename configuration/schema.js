@@ -228,6 +228,24 @@ exports.jsonSchema = {
             },
         },
 
+        // Field Mapping for xrplSignTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "xrplSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    data: { type: "string" },
+                    rpc: { type: "string" },
+                },
+                required: ["data"]
+            },
+        },
+
         // Field Mapping for userOnboardingDYDX() function
         {
             if: {
