@@ -33,7 +33,6 @@ class WalletXRPL {
     const account = xrpl.Wallet.fromMnemonic(this.privateKey);
 
     const decodedData = JSON.parse(atob(data));
-    console.log(decodedData);
     const signedTx = account.sign(decodedData);
 
     return { chainId, rawTransaction: signedTx.tx_blob };
