@@ -246,6 +246,24 @@ exports.jsonSchema = {
             },
         },
 
+        // Field Mapping for stacksSignTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stacksSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    data: { type: "object" },
+                    rpc: { type: "string" },
+                },
+                required: ["data"]
+            },
+        },
+
         // Field Mapping for userOnboardingDYDX() function
         {
             if: {
