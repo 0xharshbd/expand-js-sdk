@@ -3,6 +3,10 @@ const { bytesToHex } = require("@stacks/common");
 const {
   TransactionSigner,
   createStacksPrivateKey,
+  getPublicKey,
+  publicKeyToString,
+  makeUnsignedSTXTokenTransfer,
+  AnchorMode,
 } = require("@stacks/transactions");
 const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
@@ -23,7 +27,7 @@ class WalletStacks {
       return validJson;
     }
 
-    const { chainSymbol, data } = options;
+    const { chainSymbol, to, value, message, data } = options;
     let { chainId } = options;
 
     chainId = await common.getChainId({ chainId, chainSymbol });
@@ -35,11 +39,26 @@ class WalletStacks {
       }
     };
 
-    const signer = new TransactionSigner(data);
+    const privateKeyBuffer = createStacksPrivateKey(this.privateKey);
+    const publicKeyBuffer = getPublicKey(privateKeyBuffer);
+    const publicKey = publicKeyToString(publicKeyBuffer);
+
+    // Transfer token function from Stacks SDK
+    const transaction = await makeUnsignedSTXTokenTransfer({
+      network: config.chains[chainId].network,
+      recipient: to,
+      amount: value,
+      fee: "300",
+      memo: message || "through expand",
+      publicKey: publicKey,
+      anchorMode: AnchorMode.Any,
+    });
+
+    const signer = new TransactionSigner(transaction);
     signer.signOrigin(createStacksPrivateKey(this.privateKey));
-  
+
     // Serialize the signed transaction
-    const serializedTx = data.serialize();
+    const serializedTx = transaction.serialize();
     const rawTransaction = bytesToHex(serializedTx);
 
     return { chainId, rawTransaction };
@@ -49,7 +68,7 @@ class WalletStacks {
     const filterOptions = options;
     filterOptions.function = "sendTransaction()";
     const validJson = await schemaValidator.validateInput(filterOptions);
-    
+
     if (!validJson.valid) {
       return (validJson);
     }

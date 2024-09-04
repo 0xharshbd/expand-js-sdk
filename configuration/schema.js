@@ -257,10 +257,12 @@ exports.jsonSchema = {
                 properties: {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string" },
-                    data: { type: "object" },
-                    rpc: { type: "string" },
+                    from: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
+                    message: { type: "string" }
                 },
-                required: ["data"]
+                required: ["to", "value"]
             },
         },
 
