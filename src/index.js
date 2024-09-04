@@ -69,7 +69,6 @@ exports.decodeTransaction = async (options) => {
 };
 
 
-
 exports.Wallet = Wallet;
 
 exports.WalletFordefi = WalletFordefi;
