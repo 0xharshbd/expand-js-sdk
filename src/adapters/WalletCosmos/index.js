@@ -11,6 +11,7 @@ class WalletCosmos {
 
     constructor(options) {
         this.wallet = options.privateKey;
+        this.xApiKey = options.xApiKey;
     }
 
     signTransaction = async (transactionObject) => {
