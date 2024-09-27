@@ -1,3 +1,4 @@
+const { getKeysFromMnemonic } = require('../src/adapters/WalletBitcoin');
 const { WalletBitcoin } = require('../src/index');
 const dotenv = require('dotenv');
 
@@ -23,11 +24,13 @@ const main = async () => {
   const tx = await wallet.sendTransaction(signedTx);
 
   console.log("Tx: ", tx);
-
-
-  // const keys = await wallet.getKeysFromMnemonic({ chainId: "1801", mnenonic});
-  // console.log(keys);
 }
+const getKeys = async() => {
+  const keys = await getKeysFromMnemonic({ chainId: "1801", mnemonic: process.env.mnemonic});
+  console.log(keys);
+};
+
+getKeys();
 
 main();
 
