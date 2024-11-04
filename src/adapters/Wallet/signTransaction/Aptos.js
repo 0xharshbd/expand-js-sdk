@@ -1,4 +1,5 @@
-const aptos = require('aptos');
+const { TxnBuilderTypes, BCS, AptosAccount, 
+        AptosClient, HexString } = require('aptos');
 const config = require('../../../../configuration/config.json');
 
 module.exports = {
@@ -9,44 +10,40 @@ module.exports = {
          */
 
         try {
-
-            const { TxnBuilderTypes } = aptos;
-            const { BCS } = aptos;
             const { privateKey } = options;
             const chainId = (options.chainId && options.chainId === "1400") ? "1" : "2";
 
-            // Create an account instance with the wallet
+            const accountFrom = new AptosAccount(HexString.ensure(privateKey).toUint8Array());
 
-            const accountFrom = new aptos.AptosAccount(aptos.HexString.ensure(privateKey).toUint8Array());
+            let { data } = transactionObject;
 
-            // Creating a Transaction Payload for Transfer 
+            let transactionBuffer;
 
-            const entryFunctionPayload = new TxnBuilderTypes.TransactionPayloadEntryFunction(
-                TxnBuilderTypes.EntryFunction.natural(
-                    transactionObject.module,   // '0x1::coin' 
-                    transactionObject.method,   // "transfer"
-                    [new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(config.chains[options.chainId].aptosCoin))],
-                    [BCS.bcsToBytes(TxnBuilderTypes.AccountAddress.fromHex(transactionObject.to)), BCS.bcsSerializeUint64(transactionObject.value)]
-                ),
-            );
+            if (!data){
+                const seq = await web3.getAccount(accountFrom.address());
+                transactionBuffer = new TxnBuilderTypes.RawTransaction(
+                    TxnBuilderTypes.AccountAddress.fromHex(transactionObject.from),
+                    BigInt(seq.sequence_number),
+                    new TxnBuilderTypes.TransactionPayloadEntryFunction(
+                        TxnBuilderTypes.EntryFunction.natural(
+                            '0x1::coin',
+                            "transfer",
+                            [new TxnBuilderTypes.TypeTagStruct(TxnBuilderTypes.StructTag.fromString(config.chains[options.chainId].aptosCoin))],
+                            [BCS.bcsToBytes(TxnBuilderTypes.AccountAddress.fromHex(transactionObject.to)), BCS.bcsSerializeUint64(transactionObject.value)]
+                        ),
+                    ),
+                    options.gas ? options.gas : 1000,
+                    100,
+                    BigInt(Math.floor(Date.now() / 1000) + 10000),
+                    new TxnBuilderTypes.ChainId(chainId),
+                );
+            } else {
+                const decodedBytes = Buffer.from(data, "base64");
+                const deserializer = new BCS.Deserializer(new Uint8Array(Buffer.from(decodedBytes, "base64")));
+                transactionBuffer = TxnBuilderTypes.RawTransaction.deserialize(deserializer);
+            }
 
-            // Original transaction processing to make a Raw Transaction
-
-            const Txn = new TxnBuilderTypes.RawTransaction(
-                TxnBuilderTypes.AccountAddress.fromHex(transactionObject.from),
-                BigInt(transactionObject.sequenceNumber),
-                entryFunctionPayload,
-                options.gas ? options.gas : 1000,
-                100,
-                BigInt(Math.floor(Date.now() / 1000) + 10000),
-                new TxnBuilderTypes.ChainId(chainId),
-            );
-
-            // Generate BCS transaction for Sending to the Aptos Chain
-
-            const bcsTxn = aptos.AptosClient.generateBCSTransaction(accountFrom, Txn);
-
-            // Generating a encoded Raw Transaction for Sending it to Aptos Chain 
+            const bcsTxn = AptosClient.generateBCSTransaction(accountFrom, transactionBuffer);
 
             const rawTransaction = Buffer.from(bcsTxn).toString("base64");
 
@@ -56,7 +53,5 @@ module.exports = {
         catch (error) {
             return error;
         }
-
     }
-
 };
