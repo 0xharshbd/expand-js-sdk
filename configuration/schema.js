@@ -262,7 +262,7 @@ exports.jsonSchema = {
                     value: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
                     message: { type: "string" }
                 },
-                required: ["to", "value"]
+                required: []
             },
         },
 

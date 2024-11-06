@@ -1,3 +1,4 @@
+const { getStacksPrivateKey } = require('../src/adapters/WalletStacks');
 const { WalletStacks } = require('../src/index');
 const dotenv = require('dotenv');
 
@@ -25,5 +26,15 @@ const main = async () => {
   console.log("Tx: ", tx);
 }
 
-main();
+const getWallets = async() => {
+  const keys = await getStacksPrivateKey("<secret key>", "<password>");
+  console.log(keys);
+} 
+
+
+// getWallets()
+
+// main();
+
+
 

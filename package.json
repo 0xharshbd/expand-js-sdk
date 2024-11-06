@@ -43,7 +43,7 @@
     "@stacks/encryption": "^6.16.1",
     "@stacks/network": "^6.16.0",
     "@stacks/transactions": "^6.16.1",
-    "@stacks/wallet-sdk": "^6.16.1",
+    "@stacks/wallet-sdk": "^6.17.0",
     "@ton/ton": "^13.9.0",
     "ajv": "8.12.0",
     "ajv-errors": "3.0.0",

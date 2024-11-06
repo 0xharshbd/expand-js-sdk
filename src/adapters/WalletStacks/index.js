@@ -7,10 +7,15 @@ const {
   publicKeyToString,
   makeUnsignedSTXTokenTransfer,
   AnchorMode,
+  makeUnsignedContractCall,
+  TransactionVersion,
+  makeContractCall,
 } = require("@stacks/transactions");
 const schemaValidator = require('../../../configuration/schemaValidator');
 const common = require('../../../configuration/common');
 const config = require('../../../configuration/config.json');
+const { StacksMainnet, StacksNetwork, StacksTestnet } = require("@stacks/network");
+const { getStxAddress, generateWallet } = require("@stacks/wallet-sdk");
 
 
 class WalletStacks {
@@ -39,20 +44,53 @@ class WalletStacks {
       }
     };
 
-    const privateKeyBuffer = createStacksPrivateKey(this.privateKey);
-    const publicKeyBuffer = getPublicKey(privateKeyBuffer);
-    const publicKey = publicKeyToString(publicKeyBuffer);
+    const network = chainId === "1700" ? new StacksMainnet : new StacksTestnet();
+    let transaction;
+    let fee;
 
-    // Transfer token function from Stacks SDK
-    const transaction = await makeUnsignedSTXTokenTransfer({
-      network: config.chains[chainId].network,
-      recipient: to,
-      amount: value,
-      fee: "300",
-      memo: message || "through expand",
-      publicKey: publicKey,
-      anchorMode: AnchorMode.Any,
-    });
+    try {
+      const apiURL = `${config.url.apiurl}/chain/getgasprice/`;
+      const params = {
+        method: "post",
+        url: apiURL,
+        data: options,
+        headers: {
+          "x-api-key": this.xApiKey
+        }
+      };
+      const res = await axios(params);
+      fee = res.data.gasPrice;
+    }
+    catch (error) {
+      fee = '1000';
+    }
+
+    if (data) {
+      // Contract Call from Stacks SDK
+      transaction = JSON.parse(atob(data));
+      transaction = await makeContractCall({
+        ...transaction,
+        fee,
+        network,
+        senderKey: this.privateKey,
+        anchorMode: AnchorMode.Any,
+      })
+
+    } else {
+      // Transfer token function from Stacks SDK
+      const privateKeyBuffer = createStacksPrivateKey(this.privateKey);
+      const publicKeyBuffer = getPublicKey(privateKeyBuffer);
+      const publicKey = publicKeyToString(publicKeyBuffer);
+      transaction = await makeUnsignedSTXTokenTransfer({
+        network,
+        recipient: to,
+        amount: value,
+        fee,
+        memo: message || "through expand",
+        publicKey: publicKey,
+        anchorMode: AnchorMode.Any,
+      });
+    }
 
     const signer = new TransactionSigner(transaction);
     signer.signOrigin(createStacksPrivateKey(this.privateKey));
@@ -94,4 +132,19 @@ class WalletStacks {
   };
 }
 
-module.exports = { WalletStacks }; 
+const getStacksPrivateKey = async (mnemonic, password) => {
+  let wallet = await generateWallet({
+    secretKey: mnemonic,
+    password
+  });
+
+  const wallets = wallet.accounts.map(a => ({
+    mainnetAddress: getStxAddress({ account: a, transactionVersion: TransactionVersion.Mainnet }),
+    testnetAddress: getStxAddress({ account: a, transactionVersion: TransactionVersion.Testnet }),
+    privateKey: a.stxPrivateKey,
+  }));
+
+  return (wallets);
+}
+
+module.exports = { WalletStacks, getStacksPrivateKey }; 
