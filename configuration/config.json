@@ -263,14 +263,16 @@
             "chainName": "Stellar",
             "chainSymbol": "XLM",
             "rpc": "https://horizon.stellar.org",
-            "networkPassphrase": "Public Global Stellar Network ; September 2015"
+            "networkPassphrase": "Public Global Stellar Network ; September 2015",
+            "sorobanRpc": "https://wiser-light-hexagon.stellar-mainnet.quiknode.pro/e192229031804df050381edb40c96ee381e61c95/"
         },
         "1501": {
             "localName": "StellarTestnet",
             "chainName": "Stellar",
             "chainSymbol": "TXLM",
             "networkPassphrase": "Test SDF Network ; September 2015",
-            "rpc": "https://horizon-testnet.stellar.org"
+            "rpc": "https://horizon-testnet.stellar.org",
+            "sorobanRpc": "https://soroban-testnet.stellar.org"
         },
         "cosmoshub-4": {
             "localName": "cosmoshub_mainnet",
