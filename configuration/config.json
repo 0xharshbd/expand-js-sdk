@@ -272,7 +272,7 @@
             "chainSymbol": "TXLM",
             "networkPassphrase": "Test SDF Network ; September 2015",
             "rpc": "https://horizon-testnet.stellar.org",
-            "sorobanRpc": "https://soroban-testnet.stellar.org"
+            "sorobanRpc": "https://soroban-rpc.testnet.stellar.gateway.fm"
         },
         "cosmoshub-4": {
             "localName": "cosmoshub_mainnet",

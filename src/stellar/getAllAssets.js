@@ -5,37 +5,9 @@ const {
 
 const schemaValidator = require('../../configuration/schemaValidator');
 const { bufferToString, getTransactionByHash } = require('./helpers');
-// const errorMessage = require('../../configuration/errorMessage.json');
-
-// function bufferToString(buffer) {
-//     return buffer.toString('utf-8');
-//   }
-
-// async function getTransactionByHash(chainId,transactionHash) {
-//     const requestBody = {
-//       "jsonrpc": "2.0",
-//       "id": 8675309,
-//       "method": "getTransaction",
-//       "params": {
-//         "hash": transactionHash
-//       }
-//     };
-  
-//     try {
-//       const res = await axios.post(config.chains[chainId].sorobanRpc, requestBody, {
-//         headers: {
-//           'Content-Type': 'application/json',
-//         }
-//       });
-//       return res.data;
-//     } catch (error) {
-//       console.error('Error making request:', error);
-//       throw error;
-//     }
-//   }
 
 module.exports = {
-    getAsset: async (options) => {
+    getAllAssets: async (options) => {
         const filterOptions = options;
         filterOptions.function = "stellarDecodeTransaction()";
         const validJson = await schemaValidator.validateInput(filterOptions);
@@ -56,17 +28,21 @@ module.exports = {
             let xdrBuffer = Buffer.from(transactionMeta, 'base64');
             let resultMeta = xdr.TransactionMeta.fromXDR(xdrBuffer);
             let sorobanMeta = resultMeta.v3().sorobanMeta();
-            let returnValue = sorobanMeta.returnValue();
+            let returnValue = sorobanMeta.returnValue();  
             let response = returnValue.value();
             if(response){
-            const attributes = response[3]._attributes.val._value._attributes;
-            const fullValue = (attributes.hi._value << 64n) + attributes.lo._value;
-            return {
-                [response[1]._attributes.key._value]: bufferToString(response[1]._attributes.val._value),
-                [response[2]._attributes.key._value]: StrKey.encodeEd25519PublicKey(response[2]._attributes.val._value._value._value),
-                [response[3]._attributes.key._value]: fullValue.toString(),
-                [response[0]._attributes.key._value]: response[0]._attributes.val._value
-              };
+                return response.map(assetResponse => {
+                    const assetValues = assetResponse._value;
+                    const attributes = assetValues[3]._attributes.val._value._attributes;
+                    const fullValue = (attributes.hi._value << 64n) + attributes.lo._value;
+            
+                    return {
+                        [assetValues[1]._attributes.key._value]: bufferToString(assetValues[1]._attributes.val._value),
+                        [assetValues[2]._attributes.key._value]: StrKey.encodeEd25519PublicKey(assetValues[2]._attributes.val._value._value._value),
+                        [assetValues[3]._attributes.key._value]: fullValue.toString(),
+                        [assetValues[0]._attributes.key._value]: assetValues[0]._attributes.val._value
+                    };
+                });
             }
             else{
                 return null;
