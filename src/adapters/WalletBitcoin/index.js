@@ -35,7 +35,7 @@ class WalletBitcoin {
     };
 
     const ECPair = ECPairFactory(tinysecp);
-    const network = chainId === "1800" ? bitcoin.networks.mainnet : bitcoin.networks.testnet; // Change to bitcoin.networks.bitcoin for mainnet
+    const network = chainId === "1800" ? bitcoin.networks.mainnet : bitcoin.networks.testnet; 
 
     const privateKeyBuffer = Buffer.from(this.privateKey, 'hex');
     const keyPair = ECPair.fromPrivateKey(privateKeyBuffer, { network });
