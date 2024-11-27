@@ -1,5 +1,8 @@
-const { TransactionBlock, Ed25519Keypair, RawSigner } = require('@mysten/sui.js');
-const { fromB64 } = require("@mysten/bcs");
+const { TransactionBlock, RawSigner } = require('@mysten/sui.js');
+const { Ed25519Keypair } = require('@mysten/sui/keypairs/ed25519');
+const { Transaction } = require('@mysten/sui/transactions');
+const { fromBase64 } = require('@mysten/sui/utils');
+const config = require('../../../../configuration/config.json');
 
 module.exports = {
 
@@ -8,28 +11,19 @@ module.exports = {
         try {
             // get the secretkey from options
             const secretKey = options.privateKey;
-            const privateKeyBase64 = Buffer.from(secretKey, "hex").toString("base64"); // Convert hex to base64 string
-            // Create the keypair from converted private key
-            const keypair = Ed25519Keypair.fromSecretKey(fromB64(privateKeyBase64));
-            // Create a signer with the provided keypair and network
-            const signer = new RawSigner(keypair, web3);
-            // Create the transaction with given input
-            const tx = new TransactionBlock();
-            // Currently we support sui coin transfer
-            const [coin] = tx.splitCoins(tx.gas, [tx.pure(transactionObject.value)]);
-            // Add the instruction
-            tx.transferObjects(
-                [coin],
-                tx.pure(
-                    transactionObject.to
-                )
-            );
+            const keyPair = Ed25519Keypair.fromSecretKey(secretKey);
+            const txAsUint8Array = fromBase64(transactionObject.data);
+            let txAsJson = new TextDecoder().decode(txAsUint8Array);
+            const transactionBlock = Transaction.from(txAsJson);
+            console.log(transactionBlock);
             // Sign the transaction Block
-            const signedTransaction = await signer.signTransactionBlock({
-                transactionBlock: tx,
-            });
-            // Return the raw Transaction
-            return { "rawTransaction": signedTransaction };
+            const {bytes, signature} = await transactionBlock.sign({
+                client: web3,
+                signer: keyPair,
+              });
+            return { "rawTransaction": bytes,
+                     "signature": signature
+             };
 
         } catch (error) {
             return (error);
