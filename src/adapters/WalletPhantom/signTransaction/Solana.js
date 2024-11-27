@@ -68,7 +68,7 @@ module.exports = {
 
       const from = Keypair.fromSecretKey(decode(options.privateKey));
       const wallet = new Wallet(from);
-      let recentBlockhash = await web3.getRecentBlockhash();
+      let recentBlockhash = await web3.getLatestBlockhash();
       let preparedTx;
 
       if (!(transactionObject.data)) {
