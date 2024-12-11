@@ -7,8 +7,7 @@ module.exports = {
 
     try {
       const tronWeb = new TronWeb({
-        fullHost: options.rpc,
-        privateKey: options.privateKey,
+        fullHost: options.rpc
       });
 
       let transaction;
