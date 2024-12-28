@@ -65,7 +65,10 @@ exports.jsonSchema = {
                     to: { type: "string" },
                     value: { type: "string" },
                     gas: { type: "string" },
-                    data: { type: "string" },
+                    data: { "anyOf": [
+                                { "type": "string" },
+                                { "type": "array", "items": { "type": "string" } }
+                                ]},
                     networkId: { type: "string" }
                 },
 
@@ -129,7 +132,10 @@ exports.jsonSchema = {
                 properties: {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
-                    rawTransaction: { type: "string" },
+                    rawTransaction:  { "anyOf": [
+                                { "type": "string" },
+                                { "type": "array", "items": { "type": "string" } }
+                                ]},
                     signature: { type: "string" },
                     xApiKey: { type: "string" },
                     rpc: { type: "string" }
