@@ -325,6 +325,16 @@
             "chainSymbol": "TBTC",
             "network": "testnet",
             "fee": 2000
+        },
+        "5000": {
+            "localName": "Mantle",
+            "chainName": "Evm",
+            "chainSymbol": "MNT"
+        },
+        "5003": {
+            "localName": "MantleTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TMNT"
         }
     },
     "fireblocks": {
