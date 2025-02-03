@@ -264,7 +264,7 @@
             "chainSymbol": "XLM",
             "rpc": "https://horizon.stellar.org",
             "networkPassphrase": "Public Global Stellar Network ; September 2015",
-            "sorobanRpc": "https://wiser-light-hexagon.stellar-mainnet.quiknode.pro/e192229031804df050381edb40c96ee381e61c95/"
+            "sorobanRpc": "https://mainnet.sorobanrpc.com"
         },
         "1501": {
             "localName": "StellarTestnet",
