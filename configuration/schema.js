@@ -138,6 +138,22 @@ exports.jsonSchema = {
             },
         },
 
+        // Field Mapping for sendTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stellarDecodeTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    transactionHash: { type: "string" },
+                },
+                required: ["chainId","transactionHash"]
+            },
+        },
+
         {
             if: {
                 properties: {
