@@ -22,7 +22,7 @@ module.exports = {
                 tx.transferObjects([coin], to);
             }
 
-            const { bytes, signature } = await tx.sign({signer, client: web3, onlyTransactionKind: true});
+            const { bytes, signature } = await tx.sign({signer, client: web3, onlyTransactionKind: false});
             return { rawTransaction: bytes, signature };
         } catch (error) {
             return (error);
