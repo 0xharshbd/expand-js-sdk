@@ -348,7 +348,10 @@
     },
     "Mask250": "3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
     "url": {
-        "apiurl": "https://api.expand.network"
+        "apiurl": "https://api.expand.network/"
+    },
+    "localurl": {
+        "apiurl": "http://localhost:3000/"
     },
     "dexes": {
         "1900": {
