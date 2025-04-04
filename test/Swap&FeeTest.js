@@ -35,9 +35,9 @@ async function main() {
            "amountIn": "1000000000000000",
            "amountOutMin": "0",
            "path": ["0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2","0x6B175474E89094C44Da98b954EedeAC495271d0F"],
-           "to": "0x829bFB482331b9Dc2BEcb5483ecA79c0578c3A45",
+           "to": "<EOA_ADDRESS>",
            "deadline": "1965990894",
-           "from": "0x829bFB482331b9Dc2BEcb5483ecA79c0578c3A45",
+           "from": "<EOA_ADDRESS>",
            "gas": "203376",
            "involveBaseToken": "1"
    };
