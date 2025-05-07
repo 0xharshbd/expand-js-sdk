@@ -65,11 +65,14 @@ exports.jsonSchema = {
                     to: { type: "string" },
                     value: { type: "string" },
                     gas: { type: "string" },
-                    data: { type: "string" },
+                    data: { "anyOf": [
+                                { "type": "string" },
+                                { "type": "array", "items": { "type": "string" } }
+                                ]},
                     networkId: { type: "string" }
                 },
 
-                required: ["from", "to", "value"]
+                required: ["from"]
             }
 
         },
@@ -96,6 +99,28 @@ exports.jsonSchema = {
 
         },
 
+        // Field Mapping for txObjSol() function
+
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "txObjSol()" },
+                }
+            },
+            then: {
+                properties: {
+                    from: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string" },
+                    gas: { type: "string" },
+                    data: { type: "string" },
+                },
+
+                required: ["from", "to"]
+            }
+
+        },
+
         // Field Mapping for sendTransaction() function
         {
             if: {
@@ -107,12 +132,31 @@ exports.jsonSchema = {
                 properties: {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string", maxLength: 7, minLength: 3 },
-                    rawTransaction: { type: "string" },
+                    rawTransaction:  { "anyOf": [
+                                { "type": "string" },
+                                { "type": "array", "items": { "type": "string" } }
+                                ]},
                     signature: { type: "string" },
                     xApiKey: { type: "string" },
                     rpc: { type: "string" }
                 },
                 required: ["rawTransaction"]
+            },
+        },
+
+        // Field Mapping for sendTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stellarDecodeTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    transactionHash: { type: "string" },
+                },
+                required: ["chainId","transactionHash"]
             },
         },
 
@@ -187,6 +231,82 @@ exports.jsonSchema = {
                 required: ["jwt", "data"]
             },
         },
+
+        // Field Mapping for stellarSignTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stellarSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    data: { type: "string" },
+                    rpc: { type: "string" },
+                },
+                required: ["data"]
+            },
+        },
+
+        // Field Mapping for xrplSignTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "xrplSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    data: { type: "string" },
+                    rpc: { type: "string" },
+                },
+                required: ["data"]
+            },
+        },
+
+        // Field Mapping for BTCSignTransaction() function
+        {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "BTCSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string" },
+                    utxo: { type: "object" },
+                },
+                required: ["to", "value", "utxo"]
+            },
+        },
+
+         // Field Mapping for stacksSignTransaction() function
+         {
+            if: {
+                properties: {
+                    function: { type: "string", pattern: "stacksSignTransaction()" },
+                }
+            },
+            then: {
+                properties: {
+                    chainId: { type: "string" },
+                    chainSymbol: { type: "string" },
+                    from: { type: "string" },
+                    to: { type: "string" },
+                    value: { type: "string", pattern: '^[0-9][0-9]*$', "errorMessage": "Value should be positive" },
+                    message: { type: "string" }
+                },
+                required: []
+            },
+        },
+
         // Field Mapping for userOnboardingDYDX() function
         {
             if: {
@@ -217,6 +337,25 @@ exports.jsonSchema = {
                     values: { type: "object" }
                 },
                 required: ["domain", "types", "values"] 
+            },
+        },
+
+        // Field Mapping for signLimitOrder() function
+        {
+            if: { 
+                properties: {
+                    function: { type:"string", pattern: "signLimitOrder()" },
+                } 
+            },
+            then: {
+                properties: {
+                    dexId: { type: "string", enum: ["2200", "2201", "2202", "2203", "2204", "2205", "2206", "2207", "2208"], default: "2200" },
+                    domain: { type: "object" },
+                    types: { type: "object" },
+                    message: { type: "object" },
+                    orderType: { type: "string", enum: ["create", "cancel"], default: "create"},
+                },
+                required: ["domain", "types", "message"] 
             },
         },
         

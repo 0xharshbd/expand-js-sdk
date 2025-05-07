@@ -41,13 +41,50 @@ class Wallet {
         transactionOptions.value = new BN(transactionOptions.value);
 
             let chainName = config.chains[chainId].chainName;
+            console.log(chainName);
             
             const options = {};
             options.privateKey = this.privateKey;
-            if(chainName === "Aptos" || chainName === "Starknet") options.chainId = transactionObject.chainId;
-            if(chainName === "Near") options.rpc = rpc;
+            options.chainId = transactionObject.chainId;
+            options.rpc = rpc;
             const rawData = await rawTransaction[`signTransaction${chainName}`](web3,transactionObject,options);
             rawData.chainId = chainId;
+
+        return rawData;
+    };
+
+    signVersionedTransaction = async (transactionObject) => {
+
+        const configuration = { "params": {} };
+        transactionObject.function = "txObjSol()";
+        const validObject = await schemaValidator.validateInput(transactionObject);
+
+        if (!validObject.valid) {
+            return (validObject);
+        }
+
+        axios.defaults.headers['X-API-KEY'] = this.xApiKey;
+        const apiURL = `${config.url.apiurl}/chain/getpublicrpc/`;
+
+        const chainId = await common.getChainId({ chainId: transactionObject.chainId, chainSymbol: transactionObject.chainSymbol });
+
+        let chainName = config.chains[chainId].chainName;
+
+        if (chainName !== "Solana")
+            return new Error("chain not Supported");
+
+        configuration.params = {
+            chainId
+        };
+
+        let rpc = await axios.get(apiURL, configuration);
+        rpc = rpc.data.data.rpc;
+        const web3 = await initialiseWeb3({ rpc: rpc, chainId, key: this.xApiKey });
+
+        const options = {};
+        options.privateKey = this.privateKey;
+        const rawData = await rawTransaction[`signVersionedTransaction${chainName}`](web3, transactionObject, options);
+        rawData.chainId = chainId;
 
         return rawData;
     };
@@ -114,6 +151,42 @@ class Wallet {
         return { signature };
     };
 
+    signLimitOrder = async (options) => {
+        const filterOptions = options;
+        filterOptions.function = "signLimitOrder()";
+        const validJson = await schemaValidator.validateInput(options);
+        if (!validJson.valid) {
+            return (validJson);
+        }
+
+        const { dexId, orderType, domain, types, message } = options;
+        const { chainId } = config.dexes[dexId]
+
+        let apiConfig = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `${config.url.apiurl}/chain/getpublicrpc?chainId=${chainId}`,
+            headers: {
+                'x-api-key': this.xApiKey
+            }
+        };
+
+        let rpc = await axios.request(apiConfig);
+        rpc = rpc.data.data.rpc;
+
+        const provider = new ethers.providers.JsonRpcProvider(rpc);
+        const signer = new ethers.Wallet(this.privateKey, provider);
+        const signature = orderType === "create" ? await signer._signTypedData(
+            domain,
+            { Order: types.Order },
+            message
+        ) : await signer._signTypedData(
+            domain,
+            { CancelOrder: types.CancelOrder },
+            message
+        );
+        return { signature, ...(orderType === "create" && {salt: message.salt}) };
+    };
 }
 
 module.exports = { Wallet };

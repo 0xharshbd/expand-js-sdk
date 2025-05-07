@@ -25,6 +25,11 @@
             "chainName": "Evm",
             "chainSymbol": "TETHKVN"
         },
+        "17000": {
+            "localName": "EthereumTestnetHolesky",
+            "chainName": "Evm",
+            "chainSymbol": "TETHHSKY"
+        },
         "56": {
             "localName": "BinanceSmartChain",
             "chainName": "Evm",
@@ -84,6 +89,16 @@
             "localName": "FantomTestnet",
             "chainName": "Evm",
             "chainSymbol": "TFTM"
+        },
+        "324": {
+            "localName": "zkSync",
+            "chainName": "Evm",
+            "chainSymbol": "ZKS"
+        },
+        "300": {
+            "localName": "zkSync",
+            "chainName": "Evm",
+            "chainSymbol": "TZKS"
         },
         "900": {
             "localName": "Solana",
@@ -148,8 +163,8 @@
             "localName": "SuiTestnet",
             "chainName": "Sui",
             "chainSymbol": "TSUI",
-            "rpc": "https://fullnode.testnet.sui.io:443",
-            "publicRpc": "https://fullnode.testnet.sui.io:443"
+            "rpc": "https://fullnode.testnet.sui.io",
+            "publicRpc": "https://rpc.ankr.com/sui_testnet"
         },
         "1400": {
             "localName": "Aptos",
@@ -167,7 +182,7 @@
             "rpc": "https://fullnode.testnet.aptoslabs.com",
             "publicRpc": "https://fullnode.testnet.aptoslabs.com"
         },
-        "300": {
+        "400": {
             "localName": "StarkNet",
             "chainName": "StarkNet",
             "chainSymbol": "STRK",
@@ -177,7 +192,7 @@
             "domain": "infura.io",
             "sslMateId": "4054117900"
         },
-        "301": {
+        "401": {
             "localName": "StarkNetTestnet",
             "chainName": "StarkNet",
             "chainSymbol": "TSTRK",
@@ -242,6 +257,86 @@
             "rpc": "https://sepolia.optimism.io",
             "publicRpc": "https://sepolia.optimism.io",
             "domain": "optimism.io"
+        },
+        "1500": {
+            "localName": "Stellar",
+            "chainName": "Stellar",
+            "chainSymbol": "XLM",
+            "rpc": "https://horizon.stellar.org",
+            "networkPassphrase": "Public Global Stellar Network ; September 2015",
+            "sorobanRpc": "https://mainnet.sorobanrpc.com"
+        },
+        "1501": {
+            "localName": "StellarTestnet",
+            "chainName": "Stellar",
+            "chainSymbol": "TXLM",
+            "networkPassphrase": "Test SDF Network ; September 2015",
+            "rpc": "https://horizon-testnet.stellar.org",
+            "sorobanRpc": "https://soroban-rpc.testnet.stellar.gateway.fm"
+        },
+        "cosmoshub-4": {
+            "localName": "cosmoshub_mainnet",
+            "chainName": "Cosmos",
+            "chainSymbol": "cosmos",
+            "rpc": "https://cosmos-rpc.publicnode.com:443",
+            "publicRpc": "https://cosmos-rpc.publicnode.com:443",
+            "gasPrice": "3000"
+        },
+        "theta-testnet-001": {
+            "localName": "cosmoshub_testnet",
+            "chainName": "Cosmos",
+            "chainSymbol": "cosmos",
+            "rpc": "https://rpc.sentry-01.theta-testnet.polypore.xyz",
+            "publicRpc": "https://rpc.sentry-01.theta-testnet.polypore.xyz",
+            "gasPrice": "3000"
+        },
+        "1600": {
+            "localName": "XRPLedger",
+            "chainName": "XRPL",
+            "chainSymbol": "XRPL",
+            "network": "mainnet"
+        },
+        "1601": {
+            "localName": "XRPLedgerTestnet",
+            "chainName": "XRPL",
+            "chainSymbol": "TXRPL",
+            "network": "testnet"
+        },
+        "1700": {
+            "localName": "Stacks",
+            "chainName": "Stacks",
+            "chainSymbol": "STX",
+            "network": "mainnet"
+        },
+        "1701": {
+            "localName": "StacksTestnet",
+            "chainName": "Stacks",
+            "chainSymbol": "TSTX",
+            "network": "testnet"
+        },
+        "1800": {
+            "localName": "Bitcoin",
+            "chainName": "Bitcoin",
+            "chainSymbol": "BTC",
+            "network": "mainnet",
+            "fee": 2000
+        },
+        "1801": {
+            "localName": "BitcoinTestnet",
+            "chainName": "Bitcoin",
+            "chainSymbol": "TBTC",
+            "network": "testnet",
+            "fee": 2000
+        },
+        "5000": {
+            "localName": "Mantle",
+            "chainName": "Evm",
+            "chainSymbol": "MNT"
+        },
+        "5003": {
+            "localName": "MantleTestnetSepolia",
+            "chainName": "Evm",
+            "chainSymbol": "TMNT"
         }
     },
     "fireblocks": {
@@ -280,23 +375,6 @@
             "routerAddress": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
             "factoryAddress": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
         },
-        "1001": {
-            "localName": "UniswapV2Testnet",
-            "dexName": "UniswapV2",
-            "chainName": "Ethereum",
-            "chainId": "3",
-            "chainSymbol": "EVM",
-            "routerAddress": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
-        },
-        "1002": {
-            "localName": "UniswapV2Testnet",
-            "dexName": "UniswapV2",
-            "chainName": "Ethereum",
-            "chainId": "5",
-            "chainSymbol": "EVM",
-            "routerAddress": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
-            "factoryAddress": "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
-        },
         "1100": {
             "localName": "SushiswapV2",
             "dexName": "SushiswapV2",
@@ -306,22 +384,59 @@
             "routerAddress": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F",
             "factoryAddress": "0xC0AEe478e3658e2610c5F7A4A2E1777cE9e4f2Ac"
         },
-        "1101": {
-            "localName": "SushiswapV2Testnet",
-            "dexName": "SushiswapV2",
+        "2200": {
+            "dexName": "Kyberswap",
+            "localDexName": "Kyberswap",
             "chainName": "Ethereum",
-            "chainId": "3",
-            "chainSymbol": "EVM",
-            "routerAddress": "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506"
+            "chainId": "1"
         },
-        "1102": {
-            "localName": "SushiswapV2Testnet",
-            "dexName": "SushiswapV2",
+        "2201": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapBsc",
             "chainName": "Ethereum",
-            "chainId": "5",
-            "chainSymbol": "EVM",
-            "routerAddress": "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506",
-            "factoryAddress": "0xc35DADB65012eC5796536bD9864eD8773aBc74C4"
+            "chainId": "56"
+        },
+        "2202": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapPolygon",
+            "chainName": "Ethereum",
+            "chainId": "137"
+        },
+        "2203": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapArbitrum",
+            "chainName": "Ethereum",
+            "chainId": "42161"
+        },
+        "2204": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapAvalanche",
+            "chainName": "Ethereum",
+            "chainId": "43114"
+        },
+        "2205": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapOptimism",
+            "chainName": "Ethereum",
+            "chainId": "10"
+        },
+        "2206": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapBase",
+            "chainName": "Ethereum",
+            "chainId": "8453"
+        },
+        "2207": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapFantom",
+            "chainName": "Ethereum",
+            "chainId": "250"
+        },
+        "2208": {
+            "dexName": "Kyberswap",
+            "localDexName": "KyberswapCronos",
+            "chainName": "Ethereum",
+            "chainId": "25"
         }
     },
     "dYdXV4": {

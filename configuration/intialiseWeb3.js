@@ -4,12 +4,11 @@ const solanaWeb = require('@solana/web3.js');
 const TronWeb = require('tronweb');
 const nearApi = require('near-api-js');
 const algosdk = require('algosdk');
-const {
-    JsonRpcProvider,
-    Connection
-} = require("@mysten/sui.js");
+const { SuiClient } = require('@mysten/sui/client');
 const aptos = require('aptos');
 const { TonClient, WalletContractV4, internal } = require("@ton/ton");
+const { StargateClient } = require("@cosmjs/stargate");
+
 const common = require('./common');
 const config = require('./config.json');
 const errorMessage = require('./errorMessage.json');
@@ -80,10 +79,7 @@ exports.initialiseWeb3 = async (data) => {
 
     } else if (chainName === 'Sui') {
 
-        const connection = new Connection({
-            fullnode: config.chains[chainId].rpc,
-        });
-        web3 = new JsonRpcProvider(connection);
+        web3 = new SuiClient({ url: config.chains[chainId].rpc });
     }
     else if (chainName === 'Aptos') {
 
@@ -95,6 +91,10 @@ exports.initialiseWeb3 = async (data) => {
             endpoint: rpc,
             apiKey: config.chains[chainId].apiKey
         });
+    } else if (chainName === 'Stellar') {
+        web3 = new Horizon.Server(rpc);
+    } else if (chainName === "Cosmos") {
+        web3 = await StargateClient.connect(rpc);
     }
 
     return (web3);
