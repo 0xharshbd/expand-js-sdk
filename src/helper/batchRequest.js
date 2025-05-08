@@ -1,8 +1,3 @@
-const Web3 = require('web3');
-const axios = require('axios')
-const config = require('../../configuration/config.json');
-
-
 async function getNonce(web3, account) {
   const [pendingNonce, latestNonce] = await Promise.all([
     web3.eth.getTransactionCount(account, 'pending'), 
