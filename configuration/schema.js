@@ -455,7 +455,12 @@ exports.jsonSchema = {
                 properties: {
                     chainId: { type: "string" },
                     chainSymbol: { type: "string" },
-                    transactions: { "type": "array", "items": { "type": "object" } },
+                    transactions: {
+                        "anyOf": [
+                            { "type": "object" },
+                            { "type": "array", "items": { "type": "object" } }
+                        ]
+                    }
                 },
                 required: ["transactions"]
             },

@@ -15,9 +15,13 @@ module.exports = {
 
       const batch = new web3.BatchRequest();
       const promises = [];
+      let batches = transactions;
 
-      for (let i = 0; i < transactions.length; i++) {
-        const txParams = { ...transactions[i], nonce: web3.utils.toHex(initialNonce + i) };
+      if (typeof transactions === 'object' && transactions !== null && !Array.isArray(transactions)) {
+        batches = Object.values(transactions);
+      }
+      for (let i = 0; i < batches.length; i++) {
+        const txParams = { ...batches[i], nonce: web3.utils.toHex(initialNonce + i) };
         const signedTx = await web3.eth.accounts.signTransaction(txParams, privateKey);
 
         const promise = new Promise((resolve, reject) => {
