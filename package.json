@@ -1,6 +1,6 @@
 {
   "name": "expand-network",
-  "version": "3.2.4",
+  "version": "1.0.0",
   "description": "The external SDK for the adapter",
   "main": "src/index.js",
   "parserOptions": {
