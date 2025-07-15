@@ -1,3 +1,9 @@
+## [1.2.1](https://github.com/0xharshbd/expand-js-sdk/compare/v1.2.0...v1.2.1) (2025-07-15)
+
+### Bug Fixes
+
+* **package:** change main entry point from TypeScript to JavaScript ([5f8f836](https://github.com/0xharshbd/expand-js-sdk/commit/5f8f8362fada4038a7a3b95a9430b47f0a6fb7ce))
+
 ## [1.2.0](https://github.com/0xharshbd/expand-js-sdk/compare/v1.1.3...v1.2.0) (2025-07-15)
 
 ### ⚠ BREAKING CHANGES
