@@ -2,7 +2,7 @@
   "name": "expand-network",
   "version": "1.2.0",
   "description": "Expand Network SDK for JavaScript",
-  "main": "src/index.ts",
+  "main": "src/index.js",
   "private": true,
   "parserOptions": {
     "ecmaVersion": 2022
