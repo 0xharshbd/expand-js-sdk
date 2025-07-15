@@ -1,3 +1,9 @@
+## [1.1.3](https://github.com/0xharshbd/expand-js-sdk/compare/v1.1.2...v1.1.3) (2025-07-15)
+
+### Bug Fixes
+
+* **config:** update the description of package.json ([bde7d0d](https://github.com/0xharshbd/expand-js-sdk/commit/bde7d0d775326fe2a9296d3d3636f450359897de))
+
 ## [1.1.2](https://github.com/0xharshbd/expand-js-sdk/compare/v1.1.1...v1.1.2) (2025-07-15)
 
 ## [1.1.1](https://github.com/0xharshbd/expand-js-sdk/compare/v1.1.0...v1.1.1) (2025-07-15)
