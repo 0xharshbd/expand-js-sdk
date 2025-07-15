@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/0xharshbd/expand-js-sdk/compare/v1.1.0...v1.1.1) (2025-07-15)
+
+
+### Bug Fixes
+
+* **package:** update parserOptions to use ECMAScript 2022 and add keywords ([54823f3](https://github.com/0xharshbd/expand-js-sdk/commit/54823f3839ee097ec4a4e6b2a3fbd041c46f56cb))
+
 # [1.1.0](https://github.com/0xharshbd/expand-js-sdk/compare/v1.0.1...v1.1.0) (2025-07-15)
 
 
