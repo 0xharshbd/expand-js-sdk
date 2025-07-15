@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "The external SDK for the adapter",
   "main": "src/index.js",
+  "private": true,
   "parserOptions": {
     "ecmaVersion": 2018
   },
@@ -84,6 +85,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^11.0.3",
+    "@semantic-release/npm": "^12.0.2",
     "eslint": "8.56.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "9.1.0",

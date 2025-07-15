@@ -4,12 +4,19 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
+    
     [
       "@semantic-release/github",
       {
         "successComment": false,
         "failComment": false,
         "labels": false
+      }
+    ],
+     [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
       }
     ],
     [
@@ -19,5 +26,6 @@
         "message": "chore(release): ${nextRelease.version} [skip ci]"
       }
     ]
+   
   ]
 }
