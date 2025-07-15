@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "private": true,
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": 2022
   },
   "scripts": {
     "test": "jest",
@@ -15,7 +15,14 @@
     "type": "git",
     "url": "git+https://github.com/0xharshbd/expand-js-sdk"
   },
-  "keywords": [],
+  "keywords": [
+    "expand",
+    "sdk",
+    "blockchain",
+    "crypto",
+    "wallets",
+    "javascript"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
