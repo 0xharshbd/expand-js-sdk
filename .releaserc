@@ -69,7 +69,12 @@
         "preset": "conventionalcommits"
       }
     ],
-    "@semantic-release/changelog",
+    [
+      "@semantic-release/changelog",
+      {
+        "headerPartial": "# Changelog\n\n"
+      }
+    ],
     "@semantic-release/github",
     [
       "@semantic-release/npm",
@@ -84,7 +89,7 @@
           "CHANGELOG.md",
           "package.json"
         ],
-        "message": "chore(release): ${nextRelease.version} [skip ci]"
+        "message": "chore(release): v${nextRelease.version} [skip ci]"
       }
     ]
   ]
