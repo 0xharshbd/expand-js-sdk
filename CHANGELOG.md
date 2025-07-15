@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/0xharshbd/expand-js-sdk/compare/v1.0.0...v1.0.1) (2025-07-15)
+
+
+### Bug Fixes
+
+* **package:** revert version to 1.0.0 from 3.2.4 ([fa97c2d](https://github.com/0xharshbd/expand-js-sdk/commit/fa97c2d041286668b386c9b6cf553112cb459f8d))
+
 # 1.0.0 (2025-07-15)
 
 
