@@ -1,3 +1,13 @@
+## [2.0.0](https://github.com/0xharshbd/expand-js-sdk/compare/v1.4.0...v2.0.0) (2025-07-15)
+
+### ⚠ BREAKING CHANGES
+
+* **config:** Update package.json for new versioning and repository details
+
+### Features
+
+* **config:** please work ([7a3eb0e](https://github.com/0xharshbd/expand-js-sdk/commit/7a3eb0e4972f7e0180e863a76e92cd2c3eaa2d9d))
+
 ## [1.4.0](https://github.com/0xharshbd/expand-js-sdk/compare/v1.3.0...v1.4.0) (2025-07-15)
 
 ### ⚠ BREAKING CHANGES
