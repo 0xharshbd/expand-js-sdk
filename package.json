@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/expand-network/sdk-nodejs"
+    "url": "git+https://github.com/0xharshbd/expand-js-sdk"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/expand-network/sdk-nodejs"
+    "url": "https://github.com/0xharshbd/expand-js-sdk"
   },
-  "homepage": "https://github.com/expand-network/sdk-nodejs#readme",
+  "homepage": "https://github.com/0xharshbd/expand-js-sdk#readme",
   "dependencies": {
     "@dfns/lib-ethersjs6": "^0.2.1",
     "@dfns/sdk": "^0.2.1",
