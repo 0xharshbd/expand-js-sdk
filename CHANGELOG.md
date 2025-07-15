@@ -1,3 +1,13 @@
+## [1.4.0](https://github.com/0xharshbd/expand-js-sdk/compare/v1.3.0...v1.4.0) (2025-07-15)
+
+### ⚠ BREAKING CHANGES
+
+* **config:** IDK I wanna sleep
+
+### Features
+
+* **config:** update package.json and add semantic release ([18819f8](https://github.com/0xharshbd/expand-js-sdk/commit/18819f8592de40e9ab79cd65f46ffc1fe3dca646))
+
 ## [1.3.0](https://github.com/0xharshbd/expand-js-sdk/compare/v1.2.1...v1.3.0) (2025-07-15)
 
 ### ⚠ BREAKING CHANGES
