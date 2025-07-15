@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/0xharshbd/expand-js-sdk/compare/v1.1.3...v1.2.0) (2025-07-15)
+
+### ⚠ BREAKING CHANGES
+
+* **config:** This commit introduces significant changes to the package configuration, including updates to the versioning scheme, repository URL, and dependencies. Ensure compatibility with existing code before upgrading.
+
+### Features
+
+* **config:** let's try breaking changes ([f6c5214](https://github.com/0xharshbd/expand-js-sdk/commit/f6c52144ebf8fa9f73076ac1d8a81a8e0dbadf05))
+
 ## [1.1.3](https://github.com/0xharshbd/expand-js-sdk/compare/v1.1.2...v1.1.3) (2025-07-15)
 
 ### Bug Fixes
