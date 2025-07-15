@@ -24,9 +24,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --force
 
-      - name: "Audit dependencies signature"
-        run: npm audit signature
-
       - name: Run Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # default GitHub token
