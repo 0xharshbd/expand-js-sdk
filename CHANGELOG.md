@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/0xharshbd/expand-js-sdk/compare/v1.0.1...v1.1.0) (2025-07-15)
+
+
+### Features
+
+* **api:** add support for transaction batching ([902f8b5](https://github.com/0xharshbd/expand-js-sdk/commit/902f8b5d64bf8f0b37331f9fcdb4bd4061533bfd))
+* **workflow:** add manual trigger support for release workflow ([743238a](https://github.com/0xharshbd/expand-js-sdk/commit/743238abfc983ba89b32cdf02aafdf52f59d748d))
+
 ## [1.0.1](https://github.com/0xharshbd/expand-js-sdk/compare/v1.0.0...v1.0.1) (2025-07-15)
 
 
