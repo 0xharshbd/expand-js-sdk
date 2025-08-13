@@ -1,10 +1,14 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - develop
-  workflow_dispatch: {} # manual trigger support
+  # push:
+  #   branches:
+  #     - develop
+  workflow_run:
+    workflows: ["dummy api"]
+    types:
+      - completed
+  workflow_dispatch: {}
 
 jobs:
   release:
