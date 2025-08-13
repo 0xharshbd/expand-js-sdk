@@ -1,7 +1,10 @@
 name: Release
 
 on:
-  workflow_call:
+  workflow_run:
+    workflows: ["Echo"]
+    types:
+      - completed
   workflow_dispatch: {}
 
 jobs:
@@ -15,8 +18,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # Ensure we are on the 'api' branch. Why this is needed
-          # is because the workflow_run event does not provide the branch name.
           ref: api
 
       - name: Setup Node.js
@@ -24,8 +25,18 @@ jobs:
         with:
           node-version: 20
 
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm ci
 
-  call-release:
-    uses: ./.github/workflows/release.yml # ← works only if release.yml has `workflow_call`
+      - name: Run Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm semantic-release --debug
