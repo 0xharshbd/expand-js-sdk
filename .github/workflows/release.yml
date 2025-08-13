@@ -6,21 +6,13 @@ on:
     types:
       - completed
 
-  workflow_dispatch:
-    inputs:
-      release_type:
-        description: "Type of release to perform"
-        required: true
-        default: "patch"
-        type: choice
-        options:
-          - patch
-          - minor
-          - major
+  workflow_dispatch: {}
 
 jobs:
   release:
     name: Semantic Release
+    # Ensure this job only runs on the 'api' branch
+    if: ${{ github.ref == 'refs/heads/api' }}
     runs-on: ubuntu-latest
 
     steps:
