@@ -1,6 +1,6 @@
 name: Echo
 
-"on":
+on:
   push:
     branches:
       - api
