@@ -14,9 +14,6 @@ jobs:
       - name: "Say Hello"
         run: echo "Hello, World! This is a dummy API workflow."
 
-      - name: "Call Release Workflow"
-        uses: ./.github/workflows/release.yml
-
   release:
     name: Semantic Release
     runs-on: ubuntu-latest
