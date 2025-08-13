@@ -2,10 +2,9 @@ name: Release
 
 on:
   workflow_run:
-    workflows: [Echo]
+    workflows: ["Echo"]
     types:
       - completed
-  workflow_dispatch: {}
 
 jobs:
   release:
