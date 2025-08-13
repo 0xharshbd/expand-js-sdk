@@ -1,0 +1,15 @@
+name: Echo
+
+"on":
+  push:
+    branches:
+      - api
+
+jobs:
+  echo:
+    name: Echo Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Say Hello"
+        run: echo "Hello, World! This is a dummy API workflow."
