@@ -1,11 +1,8 @@
 name: Release
 
 on:
-  # push:
-  #   branches:
-  #     - develop
   workflow_run:
-    workflows: ["Echo"]
+    workflows: [Echo]
     types:
       - completed
   workflow_dispatch: {}
