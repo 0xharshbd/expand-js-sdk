@@ -5,7 +5,7 @@ on:
   #   branches:
   #     - develop
   workflow_run:
-    workflows: ["dummy api"]
+    workflows: ["Echo"]
     types:
       - completed
   workflow_dispatch: {}
