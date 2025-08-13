@@ -1,3 +1,9 @@
+## [2.1.2](https://github.com/0xharshbd/expand-js-sdk/compare/v2.1.1...v2.1.2) (2025-08-13)
+
+### Bug Fixes
+
+* **workflow:** update release workflow to use workflow_call and correct command for Semantic Release ([6d1bc5d](https://github.com/0xharshbd/expand-js-sdk/commit/6d1bc5dda369375d57344031e7a33be7327eede5))
+
 ## [2.1.1](https://github.com/0xharshbd/expand-js-sdk/compare/v2.1.0...v2.1.1) (2025-08-13)
 
 ### Bug Fixes

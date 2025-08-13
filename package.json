@@ -1,6 +1,6 @@
 {
   "name": "expand-network",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Expand Network SDK for JavaScript/TypeScript",
   "main": "src/index.ts",
   "private": true,
