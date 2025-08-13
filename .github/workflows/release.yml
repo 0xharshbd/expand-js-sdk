@@ -11,15 +11,10 @@ on:
 jobs:
   release:
     name: Semantic Release
+    if: ${{ github.event.workflow_run.head_branch == 'api' || github.ref == 'refs/heads/api' }}
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check branch
-        if: github.ref != 'refs/heads/api'
-        run: |
-          echo "This workflow can only run on the 'api' branch."
-          exit 0
-
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
