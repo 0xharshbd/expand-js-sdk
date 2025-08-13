@@ -12,7 +12,8 @@ jobs:
   release:
     name: Semantic Release
     # Ensure this job only runs on the 'api' branch
-    if: ${{ github.ref == 'refs/heads/api' }}
+    # Only run if the triggering workflow ran on 'api' branch
+    if: ${{ github.event.workflow_run.head_branch == 'api' || github.ref == 'refs/heads/api' }}
     runs-on: ubuntu-latest
 
     steps:
