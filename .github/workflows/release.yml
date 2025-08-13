@@ -6,6 +6,18 @@ on:
     types:
       - completed
 
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: "Type of release to perform"
+        required: true
+        default: "patch"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
 jobs:
   release:
     name: Semantic Release
