@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - develop
-  workflow_dispatch: {} # ← manual trigger support
+  workflow_dispatch: {} # manual trigger support
 
 jobs:
   release:
@@ -15,12 +15,24 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # required for semantic-release to get full history
+          fetch-depth: 0
+          # choose branch based on event type
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run Semantic Release
         env:
