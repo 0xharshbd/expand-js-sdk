@@ -6,8 +6,8 @@
             <source media="(prefers-color-scheme: dark)" srcset="https://github.com/expand-network/sdk-nodejs/blob/main/logo/whiteLogo.svg">
             <source media="(prefers-color-scheme: light)" srcset="https://github.com/expand-network/sdk-nodejs/blob/main/logo/blackLogo.svg">
             <img alt="expand.network SDK">
-        </picture>   
-    </center>    
+        </picture>
+    </center>
   <br>
   expand.network
   <br>
@@ -15,10 +15,10 @@
 <p align="center">
   <a href="#about-us">:wave: About Us</a> •
   <a href="#client-side-security-essentials">:shield: Client-Side Security Essentials</a> •
-  <a href="#installation">:desktop_computer: Installation</a> •
+  <a href="#installation">:desktop_computer: Installatio </a> •
   <a href="#usage">:technologist: Usage</a> •
   <a href="#examples">:page_with_curl: Examples</a>•
-  <a href="#socials">:globe_with_meridians: Socials</a> 
+  <a href="#socials">:globe_with_meridians: Socials</a>
 </p>
 <h3 align="center">:large_orange_diamond: SDK for <a href="https://expand.network/" target="_blank">expand.network</a> built on top of Node.js :large_orange_diamond:</h3>
 ## About us
@@ -99,25 +99,29 @@ Coming soon:
     </tr>
   </tbody>
 </table>
-<br> 
+<br>
 
 >All transactions are securely signed on your end, so your private key remains with you and never comes to us over API. We do not hold your crypto at any point: :closed_lock_with_key: **Your keys, Your crypto**. Our APIs are a one-stop-shop for you to make the enquiries and conduct the transactions as you want.
 
 ## Client-Side Security Essentials
 
 ### Certificate transparency
+
 CT makes it easier to detect and prevent digital certificate fraud, thereby improving the security of internet connections.
 >**In addition to implementing certificate transparency measures on our end, we _highly recommend_ users to also consider implementing these measures for added security benefits.**
 
 ### Private Key
+
 A user's private key is stored securely in a digital wallet, and should never be shared with anyone as it provides full access and control over their digital assets.
 >**It is _highly recommended_ that users take necessary precautions to ensure the safety and confidentiality of their private keys, as we do not possess any access or control over them.**
 
 ### Additional Security Precautions
+
 * It is important for the user to safeguard both their data and workstation from potential risks such as spoofing, tampering, and other related threats.
 * It is important for the end user to connect to a secure network and ensure that they use only TLS 1.2 or a newer version for enhanced security to safeguard them from any kind of threats and attacks.
 
 ## Installation
+
 To install, clone the repository from git directly.
 
 ```
@@ -131,9 +135,11 @@ npm i expand-network
 ```
 
 ## Usage
+>
 >You can get your API key by visiting our [website](https://expand.network/) or by clicking [here](https://auth.expand.network/)
 
 ### Chain functions
+
 Sample code: Send one Wei from one public address to another public address. You need to use your private key to sign the transaction. The return value is the transaction hash (`res`).
 
 ```js
@@ -157,8 +163,11 @@ async function main(){
 }
 main()
 ```
+
 ### Fungible functions approve
-Sample code: Approve 5 DAI (token ending in `d0F`),In this example, the "from" is the user address (ending in `006`) and "to" is protocol address (ending in `056`), so 5 DAI is approved from user address on the protocol address. User need to use private key to sign the transaction. 
+
+Sample code: Approve 5 DAI (token ending in `d0F`),In this example, the "from" is the user address (ending in `006`) and "to" is protocol address (ending in `056`), so 5 DAI is approved from user address on the protocol address. User need to use private key to sign the transaction.
+
 ```js
 const { Wallet, prepareTransaction } = require('expand-network');
 
@@ -186,8 +195,11 @@ async function approve() {
 
 approve();
 ```
+
 ### Dex functions swap
-Sample code: Swap 5 DAI (token ending in `d0F`) with WETH (token ending in `Cc2`). In this example, the "to" and "from" are the same (ending in `006`), so the swapped tokens will come back into the same address. Again, you need to use your private key to sign the transaction. 
+
+Sample code: Swap 5 DAI (token ending in `d0F`) with WETH (token ending in `Cc2`). In this example, the "to" and "from" are the same (ending in `006`), so the swapped tokens will come back into the same address. Again, you need to use your private key to sign the transaction.
+
 ```js
 const { Wallet, prepareTransaction } = require('expand-network');
 
@@ -216,8 +228,11 @@ async function swap() {
 }
 swap();
 ```
+
 ## Expand now supports Versioned transactions on Solana
+
 ### Versioned transaction
+
 Versioned Transactions are the new transaction format that allows for additional functionality in the Solana runtime, including Address Lookup Tables.
 
 The Solana runtime supports two transaction versions:
@@ -230,8 +245,11 @@ The Solana runtime supports two transaction versions:
 Now using expand users can leverage Versioned Transactions to pack richer instruction sets into a single transaction and use lookup tables.
 
 ## Examples
-### Get balance 
+
+### Get balance
+
 Sample code: get balances from different chains: Ethereum, BSC and Solana.
+
 ```js
 //Setting API-KEY for axios header 
 axios.defaults.headers['X-API-KEY'] = "YOUR_API_KEY";
@@ -259,8 +277,11 @@ response = await axios.get(baseUrl + '/chain/getbalance/', config);
 balance = response.data.data.balance / 10**9;
 console.log (`${publicAddressSolana} balance on solana chain is ${balance}`);
 ```
+
 ### Swap with best price
+
 Sample Code: For the swap pair DAI <> WETH, find the best price on three different DEX protocols: Uniswap v2, v3, and Sushiswap. Whichever DEX has the best price, swap the DAI with WETH on that particular DEX.
+
 ```js
 const { Wallet, prepareTransaction } = require('expand-network');
 
@@ -319,6 +340,8 @@ const bestBuy = async() => {
 }
 bestBuy();
 ```
-## Socials:
+
+## Socials
+>
 > [![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?logo=Twitter&logoColor=white)](https://twitter.com/expand_network)
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
