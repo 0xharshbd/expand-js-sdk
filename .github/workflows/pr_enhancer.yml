@@ -1,28 +1,38 @@
 name: Dynamic PR Template
-
 on:
   pull_request:
-    types: [opened, reopened, synchronize]
+    types: [opened]
 
 jobs:
   update-pr-template:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
       - name: Set PR Body
         uses: actions/github-script@v6
         with:
           script: |
             const branch = context.payload.pull_request.base.ref;
+            const body = context.payload.pull_request.body;
+
             let template = '';
             if (branch === 'develop') template = 'pr-develop.md';
-            else if (branch === 'uat') template = 'pr-staging.md';
-            else if (branch === 'api') template = 'pr-deployment.md';
+            else if (branch === 'uat') template = 'pr-uat.md';
+            else if (branch === 'api') template = 'pr-api.md';
 
             const fs = require('fs');
-            const body = fs.readFileSync(`.github/PULL_REQUEST_TEMPLATE/${template}`, 'utf8');
+            const path = `.github/PULL_REQUEST_TEMPLATE/${template}`;
+
+            if (!fs.existsSync(path)) {
+              throw new Error(`Template file not found: ${path}`);
+            }
+
+            const templateBody = fs.readFileSync(path, 'utf8');
 
             await github.rest.pulls.update({
               ...context.repo,
               pull_number: context.payload.pull_request.number,
-              body
+              body: templateBody
             });
